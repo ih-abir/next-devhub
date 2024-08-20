@@ -6,7 +6,7 @@ import CMS from "@utils/CMS";
 import ClipPathSVG from "@components/ClipPathSVG";
 
 import PlaybtnIcon from "@images/playbtn.svg";
-import HomeAboutBg from "@images/HomeAboutBg.svg";
+import HomeAboutBg from "@images/homeAboutBg.svg";
 
 const AboutIntro = async () => {
   const genericElement = await CMS.get('genericElement');
