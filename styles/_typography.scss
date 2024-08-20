@@ -1,0 +1,48 @@
+$Roboto: "Roboto", "Segoe UI", "Bahnschrift", "Lucida Sans", "Trebuchet MS", "Ebrima", "Leelawadee";
+$Roboto-Serif: 
+  "Roboto Serif", "Cambria", "New Century Schoolbook", 
+  "Bookman", "Big Caslon", "Times New Roman", "Georgia", "Lucida Bright";
+$Norican: "Norican", "Brush Script MT", "Lucida Handwriting", "Segoe Script", "Gabriola";
+
+@font-face {
+	font-family: "Norican";
+	font-style: normal;
+	font-display: swap;
+	src: url("/fonts/Norican-Regular.woff2") format("woff2");
+}
+
+@supports (font-variation-settings: normal) {
+  @font-face {
+    font-family: "Roboto";
+    font-style: normal;
+    font-weight: 100 1000;
+    font-display: swap;
+    src: url("/fonts/roboto-flex-v8-variable.woff2") format("woff2-variations"),
+      url("/fonts/roboto-flex-v8-variable.woff2") format("woff2");
+  }
+}
+
+@supports (font-variation-settings: normal) {
+  @font-face {
+    font-family: "Roboto Serif";
+    font-style: normal;
+    font-weight: 100 1000;
+    font-display: swap;
+    src: url("/fonts/AdobeVFPrototype.woff2") format("woff2-variations"),
+      url("/fonts/AdobeVFPrototype.woff2") format("woff2");
+  }
+}
+
+.roboto {
+  font-family: $Roboto;
+}
+
+.roboto-serif {
+  font-family: $Roboto-Serif;
+  -webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+.norican {
+  font-family: $Norican;
+}

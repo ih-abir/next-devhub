@@ -1,0 +1,60 @@
+.homeTodoCol1 {
+  order: 2;
+  margin-top: 108px;
+
+  @media (min-width: 1152px) {
+    order: 1;
+    padding: 0 24px 0 8px;
+    margin-top: 30px;
+  }
+}
+
+.homeTodoCol2 {
+  order: 1;
+  width: 100%;
+  height: 578px;
+
+  @media (min-width: 1152px) {
+    order: 2;
+    width: 42vw;
+    max-width: 599px;
+    padding-left: 8px;
+    height: auto;
+  }
+}
+
+.homeTodoTxtBg {
+  width: 630px;
+  transform: rotate(-15deg);
+  margin-right: -13%;
+
+  @media (min-width: 640px) {
+    width: 100%;
+    transform: rotate(0);
+    margin: 0;
+  }
+
+  @media (min-width: 768px) {
+    width: 612px;
+  }
+
+  @media (min-width: 1152px) {
+    min-width: 612px;
+    left: 8px;
+  }
+}
+
+.AccommoCardTxt {
+    font-size: clamp(1.563rem, 2vw + 0.15rem, 2.125rem);
+    font-weight: 700;
+    line-height: 105%;
+    top: clamp(62px, 6vw + 5px, 86px);
+
+    @media (max-width: 639.98px) {
+      font-weight: 600;
+    }
+
+    @media (max-width: 349.98px) {
+      font-size: 1.4rem;
+    }
+  }

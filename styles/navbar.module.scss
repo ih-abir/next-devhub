@@ -1,0 +1,95 @@
+.navbar {
+    @media (max-width: 639.98px) {
+      background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0));
+    }
+
+    @media (max-width: 767.98px) {
+      background-image: linear-gradient(rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0));
+    }
+  }
+  .navbarContent {
+    @apply gap-4 lg:gap-8;
+
+    @media (max-width: 375.98px) {
+      @apply gap-[5px];
+    }
+  }
+
+  .navMenu {
+    @apply gap-4 lg:gap-8;
+
+    @media (max-width: 479.98px) {
+      @apply gap-0 m-0;
+    }
+  }
+
+  .navMenuItem {
+    @apply inline-flex flex-wrap md:flex-nowrap gap-4 lg:gap-8 justify-center w-auto;
+
+    @media (max-width: 479.98px) {
+      @apply inline-block gap-0 m-0 w-[120px];
+    }
+  }
+
+  .navItem {
+    @apply flex items-center justify-center p-[5px] 
+      w-[120px] h-[48px] sm:h-auto sm:font-semibold border-b-2 border-white/25;
+
+    @media (min-width: 480px) {
+      @apply p-0 w-auto border-0;
+    }
+
+    @media (min-width: 768px) {
+      text-shadow: 0.05rem 0.01rem 0.1rem #fffbfe;
+    }
+  }
+
+  @media (min-width: 479.98px) {
+    .navAnimation {
+      &:before,
+      &:after {
+        @apply absolute inset-x-0 bottom-0 h-0.5 content-[''] bg-primary;
+      }
+
+      &:before {
+        @apply opacity-0;
+
+        transform: translateY(-12px);
+        transition: transform 0s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+          opacity 0s;
+      }
+
+      &:after {
+        @apply opacity-0;
+
+        transform: translateY(4px);
+        transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+          opacity 0.2s;
+      }
+
+      &:hover:before,
+      &:focus:before,
+      &:hover:after,
+      &:focus:after {
+        @apply opacity-100;
+
+        transform: translateY(0);
+      }
+
+      &:hover:before,
+      &:focus:before {
+        transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+          opacity 0.2s;
+      }
+
+      &:hover:after,
+      &:focus:after {
+        transition: transform 0s 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+          opacity 0s 0.2s;
+      }
+    }
+
+    .navActive {
+      @apply border-b-2 border-primary;
+    }
+  }

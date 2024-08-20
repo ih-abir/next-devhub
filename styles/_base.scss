@@ -1,0 +1,78 @@
+@use "colors";
+@use "typography";
+
+html {
+	scroll-behavior: smooth;
+	height: 100%;
+}
+
+body{
+	background-color: colors.$saltpan;
+	font-family: typography.$Roboto-Serif;
+	scroll-behavior: smooth;
+	height: 100%;
+}
+
+.shadow1{
+	box-shadow: 0px 10px 25px rgba(31, 122, 79, 0.31);
+}
+
+.underline-animated {
+	background-image: linear-gradient(120deg, colors.$viridian2 0%, colors.$viridian2 100%);
+	background-repeat: no-repeat;
+	background-size: 100% 0.15em;
+	background-position: 0 100%;
+	transition: background-size 0.25s ease-in;
+
+	&:hover{
+		background-size: 100% 100%;
+	}
+}
+
+.markdown {
+	p a,
+	ol a, 
+	ul a, 
+	p s a,
+	blockquote p a {
+		background-image: linear-gradient(120deg, colors.$viridian2 0%, colors.$viridian2 100%);
+		background-repeat: no-repeat;
+		background-size: 100% 0.15em;
+		background-position: 0 100%;
+		transition: background-size 0.25s ease-in;
+
+		&:hover{
+			background-size: 100% 100%;
+		}
+	}
+}
+
+.prose{
+	@apply max-w-none prose-a:no-underline prose-a:font-normal break-words markdown;
+
+	h3, h4{
+		font-weight: 650;
+	}
+}
+
+.wrapper{
+	width: 1254px;
+	margin: 0 auto;
+}
+
+@media (max-width: 1279.80px) {
+
+	.wrapper, .wrapper1 {
+		width: 100%;
+	}
+
+}
+
+@media (min-width: 1280px) {
+
+	.wrapper1 {
+		width: 1254px;
+		margin: 0 auto;
+	}
+
+}

@@ -1,0 +1,35 @@
+.headerContainer {
+  height: 100%;
+
+  @media (min-width: 640px) {
+    height: clamp(500px, 35vw + 130px, 650px);
+  }
+}
+
+.headerContentContainer {
+  @apply mt-[35vw] sm:mt-0 py-[46px] px-[26px] lg:p-0;
+
+  @media (min-width: 640px) {
+    width: clamp(350px, 36vw + 250px, 940px);
+  }
+
+  @media (min-width: 1024px) {
+    width: clamp(350px, 30vw + 200px, 940px);
+  }
+
+  @media (min-width: 1280px) {
+    width: clamp(350px, 36vw + 250px, 940px);
+  }
+}
+
+.heroCurve {
+  aspect-ratio: 3.87 / 4.62;
+  width: 100vw;
+  max-height: 462px;
+
+  @media (min-width: 640px) {
+    aspect-ratio: 6.23 / 6.81;
+    width: clamp(500px, 35vw + 30px, 650px);
+    max-height: 100%;
+  }
+}

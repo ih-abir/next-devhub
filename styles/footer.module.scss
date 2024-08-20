@@ -1,0 +1,67 @@
+.footer {
+  clip-path: url(#footer-bg-curve-sm);
+
+  @media (min-width: 640px) {
+    clip-path: url(#footer-bg-curve);
+  }
+}
+
+.footerLinkContainer a {
+  &:before {
+    @apply z-[-1] absolute w-full bottom-0 left-0 content-['']
+			rounded-[5px] scale-x-0 bg-saltpan;
+
+    animation: 1.4s forwards no-hover-v linear;
+    animation-fill-mode: forwards;
+  }
+
+  &:hover:before,
+  &:focus:before {
+    animation: 0.5s forwards hover-v linear;
+    animation-fill-mode: forwards;
+  }
+}
+
+@keyframes hover-v {
+  0% {
+    transform: scaleX(0);
+    height: 3px;
+  }
+
+  45% {
+    transform: scaleX(1.05);
+    height: 3px;
+  }
+
+  55% {
+    height: 3px;
+  }
+
+  100% {
+    transform: scaleX(1.05);
+    height: 100%;
+  }
+}
+
+@keyframes no-hover-v {
+  0% {
+    transform: scaleX(1.05);
+    height: 100%;
+  }
+
+  45% {
+    height: 3px;
+  }
+
+  55% {
+    transform: scaleX(1.05);
+    height: 3px;
+    opacity: 1;
+  }
+
+  100% {
+    transform: scaleX(0);
+    height: 3px;
+    opacity: 0.02;
+  }
+}
