@@ -41,8 +41,8 @@ const Footer = async ({genericElement}: {genericElement: any}) => {
               <Image
                 className="hidden sm:block w-full h-full object-cover"
                 src={background.url}
-                layout="fill"
-                objectFit="cover"
+                width={1440}
+                height={385.33}
                 sizes="(max-width: 768px) 100vw, (max-width: 1440px) 1440px, 2050px"
                 alt={background?.alternativeText || ''}
               />
@@ -51,8 +51,8 @@ const Footer = async ({genericElement}: {genericElement: any}) => {
               <Image
                 className="block sm:hidden w-full h-full object-cover"
                 src={backgroundSm.url}
-                layout="fill"
-                objectFit="cover"
+                width={639}
+                height={360.33}
                 sizes="(max-width: 425px) 100vw, (max-width: 639px) 639px"
                 alt={backgroundSm?.alternativeText || ''}
               />

@@ -115,7 +115,6 @@ const Hero = async (props: any) => {
 		                    src={blob?.url}
 		                    width={650}
 		                    height={200}
-		                    aspectRatio={blob.width + `:` + blob.height}
 		                    alt={blob?.alternativeText}
 		                    loading="eager"
 		                  />

@@ -102,9 +102,9 @@ const Homepage = async () => {
                           <Image
                             className="w-full h-full object-cover"
                             src={blob?.url}
-                            width={240}
-                            height="240"
-                            aspectRatio={blob.width + `:` + blob.height}
+                            width={230}
+                            height={167}
+                            sizes="167px"
                             alt={blob.alternativeText}
                           />
                         </Link>
