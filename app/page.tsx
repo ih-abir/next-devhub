@@ -283,7 +283,7 @@ const Homepage = async () => {
                   <Image className="w-full h-full" width={50} height={50} src={CompanySecBg} alt="" />
                   <div className="flex flex-wrap justify-center items-center absolute inset-0 z-20">
                     <div className="-mt-10 sm:-mt-20">
-                      {boats.slice(0, 3).map((data, idx) => (
+                      {boats.slice(0, 3).map((data: any, idx: number) => (
                         <div
                           key={idx}
                           className={`${
