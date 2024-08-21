@@ -24,6 +24,7 @@ const nextConfig = {
     
     return config;
   },
+  trailingSlash: true,
 };
 
 export default nextConfig;
