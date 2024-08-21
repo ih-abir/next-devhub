@@ -28,8 +28,6 @@ function getId(string: string) {
   return id;
 }
 
-export const runtime = "edge";
-
 const Homepage = async () => {
   const page = await CMS.get('homepage'),
     todos = await CMS.get('todos'),
