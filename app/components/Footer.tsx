@@ -74,7 +74,7 @@ const Footer = async ({genericElement}: {genericElement: any}) => {
                   styles.footerLinkContainer
                 ].join(' ')}
               >
-                {menu.map(({ Title, Title_url }) => (
+                {menu.map(({ Title, Title_url }: { Title: string; Title_url: string }) => (
                   <Link
                     key={Title_url}
                     href={Title_url === '/' ? '/' : `/${Title_url}/`}
