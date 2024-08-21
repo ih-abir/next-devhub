@@ -67,11 +67,12 @@ const Footer = async ({genericElement}: {genericElement: any}) => {
                   </div>
                 </Link>
               </div>
-              <div className={[
+              <div
+                className={[
                   "md:ml-16 my-auto flex flex-wrap gap-4 md:gap-8 items-center roboto-serif",
                   "text-[clamp(.9rem,3vw+.02rem,1.25rem)] font-semibold xs:font-medium text-greenpea", 
                   styles.footerLinkContainer
-                ]}
+                ].join(' ')}
               >
                 {menu.map(({ Title, Title_url }) => (
                   <Link
