@@ -70,6 +70,7 @@ const Homepage = async () => {
               ) => {
                 return (
                   <div
+                    key={idx}
                     className={[
                       idx === 1
                         ? "sm:absolute order-2 sm:top-52 mb-11 sm:mb-6 sm:mr-6 sm:ml-20 xl:mb-0 sm:my-auto"
@@ -194,15 +195,19 @@ const Homepage = async () => {
           ].join(' ')}
         >
           {accommodations.map(
-            ({
-              Title,
-              Intro_blob: {
-                data: { attributes: blob },
+            (
+              {
+                Title,
+                Intro_blob: {
+                  data: { attributes: blob },
+                },
+                Meta: { URL_slug },
               },
-              Meta: { URL_slug },
-            }) => {
+              idx
+            ) => {
               return (
                 <div
+                  key={idx}
                   className="flex justify-center items-center w-full"
                   role="listitem"
                   aria-label={Title}
@@ -287,9 +292,9 @@ const Homepage = async () => {
                             idx === 1 ? 'flex justify-end ml-6 lg:ml-20' : 'flex justify-start'
                           } gap-7 md:gap-x-6 lg:gap-x-12 xl:gap-x-16`}
                         >
-                          {boats.splice(0, 2).map(({ Title, Logo: { data: { attributes: logo } } }) => (
+                          {boats.splice(0, 2).map(({ Title, Logo: { data: { attributes: logo } } }, idx) => (
                             <Link
-                              key={Title}
+                              key={idx}
                               href={`/${page.Boat_intro_button_link}/#${Title.replace(/\s+/g, '-').toLowerCase()}`}
                               aria-label={Title}
                             >

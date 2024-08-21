@@ -46,7 +46,7 @@ const Navbar = async () => {
           <div className={`flex mr-auto my-auto ${styles.navMenuItem}`}>
             {
               menu.slice(0, 3).map(({ Title, Title_url }, idx) => (
-                <div className={idx === 0 ? "hidden lg:block" : ""}>
+                <div key={idx} className={idx === 0 ? "hidden lg:block" : ""}>
                   <Link
                     href={Title_url === "/" ? "/" : `/${Title_url}/`}
                     className={[
@@ -64,7 +64,7 @@ const Navbar = async () => {
           <div className={`${styles.navMenuItem} flex my-auto text-center sm:text-left`}>
             {
               menu.slice(3, 5).map(({ Title, Title_url }, idx) => (
-                <div>
+                <div key={idx}>
                   <Link
                     href={Title_url === "/" ? "/" : `/${Title_url}/`}
                     className={[
