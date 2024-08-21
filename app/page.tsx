@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import Markdown from "react-markdown";
+import Icon from "@components/Icon";
 import AboutIntro from "@components/AboutIntro";
 import Hero from "@components/Hero";
 
@@ -8,6 +9,7 @@ import styles from '@styles/home.module.scss';
 import TodoTxtBg from "@images/todoTxtBg.svg";
 import PlaybtnIcon from "@images/playbtn.svg";
 import PlaybtnWIcon from "@images/playbtnW.svg";
+import CompanySecBg from "@images/homeCompanySecBg.svg";
 
 import CMS from "@utils/CMS";
 
@@ -30,13 +32,14 @@ function getId(string) {
 const Homepage = async () => {
   const page = await CMS.get('homepage'),
     todos = await CMS.get('todos'),
-    accommodations = await CMS.get('accommodations');
+    accommodationsData = await CMS.get('accommodations'),
+    boatsData = await CMS.get('boats');
+    // console.log(boats)
 
-    // console.log(accommodations)
-
-    const posts = accommodations
+    const accommodations = accommodationsData
       .slice(0, 6)
-      .sort(sortFunction);
+      .sort(sortFunction),
+      boats = boatsData.sort(sortFunction);
 
   return (
     <>
@@ -190,7 +193,7 @@ const Homepage = async () => {
             "lg:grid-cols-3 gap-[35px] justify-center px-8 xl:px-3 mt-16",
           ].join(' ')}
         >
-          {posts.map(
+          {accommodations.map(
             ({
               Title,
               Intro_blob: {
@@ -249,6 +252,75 @@ const Homepage = async () => {
           </Link>
         </div>
       </section>
+
+        {
+          boats.length > 1 && (
+            <section id={getId(page.Boat_title)} className="bg-lightGreen overflow-hidden">
+              <div className="wrapper flex flex-wrap justify-center overflow-x-hidden py-10 companySec">
+                <div className="order-2 md:order-1 w-full md:w-1/2 lg:w-5/12 px-8 xl:px-3 flex items-center my-auto my-16">
+                  <div className="companyContentContainer">
+                    <h2 className="text-[clamp(2.4rem,6vw+.15rem,3.8rem)] leading-[100%] font-semibold">
+                      {page.Boat_title}
+                    </h2>
+                    <div className="py-10 md:py-12 lg:py-14 xl:py-16 text-xl font-medium leading-8 prose">
+                      <Markdown>{page.Boat_intro_text}</Markdown>
+                    </div>
+                    <Link
+                      href={`/${page.Boat_intro_button_link}/`}
+                      className="inline-flex items-center justify-center py-1.5 px-5 mt-3 text-lg font-medium bg-downy rounded-full"
+                    >
+                      {page.Boat_intro_button_text}
+                      <div className="h-3.5 ml-2.5">
+                        <Image className="w-full h-full" width={50} height={50} src={PlaybtnIcon} />
+                      </div>
+                    </Link>
+                  </div>
+                </div>
+                <div className="relative order-1 md:order-2 flex justify-center items-center w-full sm:w-2/3 md:w-1/2 lg:w-7/12 px-8 xl:px-3 xl:pl-14 mb-16 md:my-16">
+                  <Image className="w-full h-full" width={50} height={50} src={CompanySecBg} />
+                  <div className="flex flex-wrap justify-center items-center absolute inset-0 z-20">
+                    <div className="-mt-10 sm:-mt-20">
+                      {boats.slice(0, 3).map((data, idx) => (
+                        <div
+                          key={idx}
+                          className={`${
+                            idx === 1 ? 'flex justify-end ml-6 lg:ml-20' : 'flex justify-start'
+                          } gap-7 md:gap-x-6 lg:gap-x-12 xl:gap-x-16`}
+                        >
+                          {boats.splice(0, 2).map(({ Title, Logo: { data: { attributes: logo } } }) => (
+                            <Link
+                              key={Title}
+                              href={`/${page.Boat_intro_button_link}/#${Title.replace(/\s+/g, '-').toLowerCase()}`}
+                              aria-label={Title}
+                            >
+                              <div className={[
+                                  "overflow-hidden inline-flex items-center justify-center",
+                                  "p-2 sm:p-3 md:px- mt-7 sm:mt-10 lg:mt-14 xl:mt-16 bg-white rounded-full",
+                                  styles.companyImgContainer
+                                ].join(' ')}
+                              > 
+                                <div className="h-full w-full">
+                                  <Image
+                                    className="w-full h-full object-contain"
+                                    src={logo.url}
+                                    width={logo.width}
+                                    height={logo.height}
+                                    sizes="(max-width: 425px) 100vw, (max-width: 1023px) 121px, 186px"
+                                    alt={logo.alternativeText}
+                                  />
+                                </div>
+                              </div>
+                            </Link>
+                          ))}
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+          )
+        }
 
       <AboutIntro />
     </>
