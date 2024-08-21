@@ -66,7 +66,7 @@ const Homepage = async () => {
                   },
                   Meta: { URL_slug },
                 }: any,
-                idx
+                idx: number
               ) => {
                 return (
                   <div
@@ -203,7 +203,7 @@ const Homepage = async () => {
                 },
                 Meta: { URL_slug },
               }: any,
-              idx
+              idx: number
             ) => {
               return (
                 <div
@@ -292,7 +292,7 @@ const Homepage = async () => {
                             idx === 1 ? 'flex justify-end ml-6 lg:ml-20' : 'flex justify-start'
                           } gap-7 md:gap-x-6 lg:gap-x-12 xl:gap-x-16`}
                         >
-                          {boats.splice(0, 2).map(({ Title, Logo: { data: { attributes: logo } } }: any, idx) => (
+                          {boats.splice(0, 2).map(({ Title, Logo: { data: { attributes: logo } } }: any, idx: number) => (
                             <Link
                               key={idx}
                               href={`/${page.Boat_intro_button_link}/#${Title.replace(/\s+/g, '-').toLowerCase()}`}
