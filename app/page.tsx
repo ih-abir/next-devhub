@@ -12,13 +12,13 @@ import CompanySecBg from "@images/homeCompanySecBg.svg";
 
 import CMS from "@utils/CMS";
 
-function sortFunction(a, b) {
+function sortFunction(a: string, b: string) {
   var dateA = new Date(a.date).getTime();
   var dateB = new Date(b.date).getTime();
   return dateA > dateB ? 1 : -1;
 }
 
-function getId(string) {
+function getId(string: string) {
   const id = string
     .toLowerCase()
     .replace(/[^\w\s]/gi, "")
