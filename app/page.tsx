@@ -218,7 +218,6 @@ const Homepage = async () => {
                           className="w-full h-full object-cover z-10"
                           src={blob?.url}
                           sizes="(max-width: 1023px) 100vw, 470px"
-                          format="webp"
                           width="200"
                           height="200"
                           alt={blob.alternativeText}
