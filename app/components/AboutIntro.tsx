@@ -28,7 +28,13 @@ const AboutIntro = async () => {
       <div className="w-full md:w-1/2 lg:w-7/12 px-8 xl:px-3 pb-12 md:pb-0">
         <div className="relative">
           <div className="z-[5] w-full max-w-[640px] h-full opacity-80">
-            <Image className="w-full h-full" src={HomeAboutBg} />
+            <Image 
+              className="w-full h-full" 
+              src={HomeAboutBg}
+              width={640}
+              height={705.08}
+              sizes="(max-width: 1280px) 640px, (max-width: 1024px) calc(50vw - 64px), calc(100vw - 64px)"
+            />
           </div>
           <ClipPathSVG
             id="about-intro-curve"
@@ -43,10 +49,9 @@ const AboutIntro = async () => {
               <Image
                 className="w-full h-full object-cover"
                 src={blob?.url}
-                width={650}
-                height={200}
-                sizes="(max-width: 1023px) 100vw, 470px"
-                format="webp"
+                width={640}
+                height={705.08}
+                sizes="(max-width: 767px) calc(100vw - 64px), (max-width: 1024px) calc(50vw - 64px), 640px"
                 alt={blob.alternativeText}
               />
             </div>

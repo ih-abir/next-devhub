@@ -8,6 +8,7 @@ const Image = `
         width
         height
         alternativeText
+        formats
       }
     }
   }
