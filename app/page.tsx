@@ -12,7 +12,7 @@ import CompanySecBg from "@images/homeCompanySecBg.svg";
 
 import CMS from "@utils/CMS";
 
-function sortFunction(a: string, b: string) {
+function sortFunction(a: any, b: any) {
   var dateA = new Date(a.date).getTime();
   var dateB = new Date(b.date).getTime();
   return dateA > dateB ? 1 : -1;
