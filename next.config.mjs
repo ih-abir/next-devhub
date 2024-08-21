@@ -2,6 +2,9 @@
 import path from 'path';
 
 const nextConfig = {
+  experimental: {
+    runtime: 'edge', // Ensure edge runtime if applicable
+  },
    publicRuntimeConfig: {
     siteOrigin: "http://localhost:3000",
   },
