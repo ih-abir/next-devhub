@@ -34,6 +34,7 @@ const AboutIntro = async () => {
               width={640}
               height={705.08}
               sizes="(max-width: 1280px) 640px, (max-width: 1024px) calc(50vw - 64px), calc(100vw - 64px)"
+              alt=""
             />
           </div>
           <ClipPathSVG
@@ -82,7 +83,7 @@ const AboutIntro = async () => {
           >
             {button_text || "More Details"}
             <div className="h-3.5 ml-2.5">
-              <Image className="w-full h-full" src={PlaybtnIcon} />
+              <Image className="w-full h-full" src={PlaybtnIcon} alt=""/>
             </div>
           </Link>
         </div>

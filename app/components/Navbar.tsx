@@ -33,6 +33,7 @@ const Navbar = async () => {
             <Image
               className="w-full h-9 md:h-10 my-auto invert md:invert-0 brightness-0 md:brightness-100"
               src={Brand}
+              alt="Brand-icon"
             />
           </Link>
         </div>

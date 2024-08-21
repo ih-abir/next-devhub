@@ -64,6 +64,7 @@ const Hero = async (props: any) => {
 		              src={HeaderTxtBg}
 		              width={200}
 		              height={200}
+		              alt=""
 		            />
 		            <h1
 		              className={[
@@ -134,7 +135,7 @@ const Hero = async (props: any) => {
 
 		                    <div className="bg-primary flex items-center justify-center w-[80px] rounded-r-xl">
 		                      <div className="w-auto h-[22px]">
-		                        <Image className="w-full h-full" src={locationIcon} />
+		                        <Image className="w-full h-full" src={locationIcon} alt=""/>
 		                      </div>
 		                    </div>
 		                  </div>

@@ -132,7 +132,7 @@ const Homepage = async () => {
                             ? page.Todo_button_text_2
                             : page.Todo_button_text_3}
                           <div className="h-3.5 ml-2.5">
-                            <Image className="w-full h-full" src={PlaybtnWIcon} />
+                            <Image className="w-full h-full" src={PlaybtnWIcon} alt=""/>
                           </div>
                         </Link>
                       </div>
@@ -145,7 +145,7 @@ const Homepage = async () => {
 
           <div className={`relative flex items-center justify-center ${styles.homeTodoCol2}`}>
             <div className={`absolute z-10 ${styles.homeTodoTxtBg}`}>
-              <Image className="w-full h-full" src={TodoTxtBg} />
+              <Image className="w-full h-full" src={TodoTxtBg} alt=""/>
             </div>
             <div className="w-full -mt-24 sm:-mt-32 md:-mt-40 xl:-mt-36 relative z-20">
               <div
@@ -170,7 +170,7 @@ const Homepage = async () => {
                   {page.Todo_intro_button_text}
 
                   <div className="h-3.5 ml-2.5">
-                    <Image className="w-full h-full" src={PlaybtnIcon} />
+                    <Image className="w-full h-full" src={PlaybtnIcon} alt="" />
                   </div>
                 </Link>
               </div>
@@ -252,7 +252,7 @@ const Homepage = async () => {
           >
             {page.Accomodation_button_text}
             <div className="h-3.5 ml-2.5">
-              <Image className="w-full h-full" src={PlaybtnIcon} />
+              <Image className="w-full h-full" src={PlaybtnIcon} alt=""/>
             </div>
           </Link>
         </div>
@@ -276,13 +276,13 @@ const Homepage = async () => {
                     >
                       {page.Boat_intro_button_text}
                       <div className="h-3.5 ml-2.5">
-                        <Image className="w-full h-full" width={50} height={50} src={PlaybtnIcon} />
+                        <Image className="w-full h-full" width={50} height={50} src={PlaybtnIcon} alt="" />
                       </div>
                     </Link>
                   </div>
                 </div>
                 <div className="relative order-1 md:order-2 flex justify-center items-center w-full sm:w-2/3 md:w-1/2 lg:w-7/12 px-8 xl:px-3 xl:pl-14 mb-16 md:my-16">
-                  <Image className="w-full h-full" width={50} height={50} src={CompanySecBg} />
+                  <Image className="w-full h-full" width={50} height={50} src={CompanySecBg} alt="" />
                   <div className="flex flex-wrap justify-center items-center absolute inset-0 z-20">
                     <div className="-mt-10 sm:-mt-20">
                       {boats.slice(0, 3).map((data, idx) => (
