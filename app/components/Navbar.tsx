@@ -94,7 +94,7 @@ const Navbar = async () => {
 
           <Link href={Instagram_link} aria-label="Instagram" className="flex-none">
             <div className="h-[clamp(28px,4vw+1.4px,33px)]">
-              <Image className="w-full h-full" src={CameraIcon} />
+              <Image className="w-full h-full" src={CameraIcon} alt="" />
             </div>
           </Link>
         </div>
