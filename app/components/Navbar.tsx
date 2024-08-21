@@ -46,7 +46,7 @@ const Navbar = async () => {
         >
           <div className={`flex mr-auto my-auto ${styles.navMenuItem}`}>
             {
-              menu.slice(0, 3).map(({ Title, Title_url }: any, idx) => (
+              menu.slice(0, 3).map(({ Title, Title_url }: any, idx: number) => (
                 <div key={idx} className={idx === 0 ? "hidden lg:block" : ""}>
                   <Link
                     href={Title_url === "/" ? "/" : `/${Title_url}/`}
