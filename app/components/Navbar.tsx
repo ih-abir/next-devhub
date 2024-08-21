@@ -64,7 +64,7 @@ const Navbar = async () => {
           </div>
           <div className={`${styles.navMenuItem} flex my-auto text-center sm:text-left`}>
             {
-              menu.slice(3, 5).map(({ Title, Title_url }: any, idx) => (
+              menu.slice(3, 5).map(({ Title, Title_url }: any, idx: number) => (
                 <div key={idx}>
                   <Link
                     href={Title_url === "/" ? "/" : `/${Title_url}/`}
