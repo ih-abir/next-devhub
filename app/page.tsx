@@ -1,7 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
 import Markdown from "react-markdown";
-import Icon from "@components/Icon";
 import AboutIntro from "@components/AboutIntro";
 import Hero from "@components/Hero";
 
