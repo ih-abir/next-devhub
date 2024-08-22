@@ -12,6 +12,11 @@ import CMS from "@utils/CMS";
 const { publicRuntimeConfig } = getConfig();
 const domain = publicRuntimeConfig.siteOrigin;
 
+interface Props {
+  menu: Record<string, any>;
+  Instagram_link?: string;
+}
+
 const Navbar = async () => {
   const genericElement = await CMS.get('genericElement');
 
@@ -49,7 +54,7 @@ const Navbar = async () => {
         >
           <div className={`flex mr-auto my-auto ${styles.navMenuItem}`}>
             {
-              menu.slice(0, 3).map(({ Title, Title_url }: any, idx: number) => (
+              menu.slice(0, 3).map(({ Title, Title_url }, idx) => (
                 <div key={idx} className={idx === 0 ? "hidden lg:block" : ""}>
                   <Link
                     href={Title_url === "/" ? "/" : `/${Title_url}/`}
@@ -67,7 +72,7 @@ const Navbar = async () => {
           </div>
           <div className={`${styles.navMenuItem} flex my-auto text-center sm:text-left`}>
             {
-              menu.slice(3, 5).map(({ Title, Title_url }: any, idx: number) => (
+              menu.slice(3, 5).map(({ Title, Title_url }, idx) => (
                 <div key={idx}>
                   <Link
                     href={Title_url === "/" ? "/" : `/${Title_url}/`}
