@@ -6,7 +6,25 @@ import Brand from "@images/nusa-ceningan-io-logo.svg";
 import styles from "@styles/footer.module.scss";
 import ClipPathSVG from "@components/ClipPathSVG";
 
-const Footer = async ({genericElement}: {genericElement: any}) => {
+interface MenuItem {
+  Title: string;
+  Title_url: string;
+}
+
+interface BlobAttributes {
+  url: string;
+  alternativeText?: string;
+}
+
+interface FooterProps {
+  menu: MenuItem[];
+  Instagram_link?: string;
+  copyright: string;
+  background: BlobAttributes;
+  BlobAttributes: BlobAttributes;
+}
+
+const Footer = async ({genericElement}: {genericElement: FooterProps}) => {
 
   const {
     Footer_menu: menu,
@@ -74,7 +92,7 @@ const Footer = async ({genericElement}: {genericElement: any}) => {
                   styles.footerLinkContainer
                 ].join(' ')}
               >
-                {menu.map(({ Title, Title_url }: { Title: string; Title_url: string }) => (
+                {menu.map(({ Title, Title_url }) => (
                   <Link
                     key={Title_url}
                     href={Title_url === '/' ? '/' : `/${Title_url}/`}
