@@ -8,9 +8,20 @@ import ClipPathSVG from "@components/ClipPathSVG";
 import PlaybtnIcon from "@images/playbtn.svg";
 import HomeAboutBg from "@images/homeAboutBg.svg";
 
-const AboutIntro = async () => {
-  const genericElement = await CMS.get('genericElement');
+interface BlobAttributes {
+  url: string;
+  alternativeText: string;
+}
 
+interface HeroProps {
+  About_intro_title: string;
+  About_intro_text?: string;
+  About_intro_button_text?: string;
+  About_intro_button_link?: string;
+  About_intro_blob?: { data: { attributes: BlobAttributes } };
+}
+
+const AboutIntro = async () => {
   const {
     About_intro_title: title,
     About_intro_text: intro_text,
@@ -19,7 +30,7 @@ const AboutIntro = async () => {
     About_intro_blob: {
       data: { attributes: blob },
     },
-  } = genericElement;
+  } = await CMS.get('genericElement');
 
   return (
     <div
@@ -31,9 +42,6 @@ const AboutIntro = async () => {
             <Image 
               className="w-full h-full" 
               src={HomeAboutBg}
-              width={640}
-              height={705.08}
-              sizes="(max-width: 1280px) 640px, (max-width: 1024px) calc(50vw - 64px), calc(100vw - 64px)"
               alt=""
             />
           </div>
@@ -51,9 +59,9 @@ const AboutIntro = async () => {
                 className="w-full h-full object-cover"
                 src={blob?.url}
                 width={640}
-                height={705.08}
-                sizes="(max-width: 767px) calc(100vw - 64px), (max-width: 1024px) calc(50vw - 64px), 640px"
-                alt={blob.alternativeText}
+                height={705}
+                sizes="(min-width: 1280px) 640px, (min-width: 768px) 320px, calc(100vw-64px)"
+                alt={blob?.alternativeText}
               />
             </div>
           </div>

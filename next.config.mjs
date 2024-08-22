@@ -7,6 +7,8 @@ const nextConfig = {
   },
   images: {
     formats: ['image/avif', 'image/webp'],
+    deviceSizes: [640, 768, 828, 1024, 1280, 1440, 1536, 1920, 2048, 3840],
+    imageSizes: [128, 190, 230, 270, 386],
     remotePatterns: [
       {
         protocol: 'https',

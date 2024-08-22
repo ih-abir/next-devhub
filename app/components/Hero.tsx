@@ -8,16 +8,31 @@ import locationIcon from "@images/location.svg";
 import styles from '@styles/hero.module.scss';
 import ClipPathSVG from "@components/ClipPathSVG";
 
-const Hero = async (props: any) => {
-	const {
-		Title: title,
-		Title_tag: title_tag,
-		Intro_text: intro_text,
-		Intro_button_text: btnText,
-  	Intro_button_link: link,
-		Intro_blob: intro_blob,
-		Intro_blob_place_text: blob_place_text,
-	} = props;
+interface Blob {
+  url: string;
+  alternativeText: string;
+}
+
+interface HeroProps {
+  Title: string;
+  Title_tag?: string;
+  Intro_text: string;
+  Intro_button_text?: string;
+  Intro_button_link?: string;
+  Intro_blob?: { data: { attributes: Blob } };
+  Intro_blob_place_text?: string;
+}
+
+const Hero = async (props: HeroProps) => {
+  const {
+    Title: title,
+    Title_tag: title_tag,
+    Intro_text: intro_text,
+    Intro_button_text: btnText,
+    Intro_button_link: link,
+    Intro_blob: intro_blob,
+    Intro_blob_place_text: blob_place_text,
+  } = props;
 
 	const blob = intro_blob?.data?.attributes;
 
@@ -34,7 +49,8 @@ const Hero = async (props: any) => {
 		    >
 		      <div
 		        className={blob
-		          ? `${styles.headerContentContainer} bg-white/80 lg:bg-transparent rounded-[35px] lg:rounded-none`
+		          ? `${styles.headerContentContainer} bg-white/80
+		          		lg:bg-transparent rounded-[35px] lg:rounded-none`
 		          : "max-w-[1024px] text-center"}
 		      >
 		        {
@@ -62,9 +78,8 @@ const Hero = async (props: any) => {
 		            <Image
 		              className="absolute inset-x-0 top-3 sm:top-0 z-10 h-auto sm:h-full w-full"
 		              src={HeaderTxtBg}
-		              width={200}
-		              height={200}
 		              alt=""
+		              priority
 		            />
 		            <h1
 		              className={[
@@ -114,10 +129,11 @@ const Hero = async (props: any) => {
 		                  <Image
 		                    className="w-full h-full"
 		                    src={blob?.url}
-		                    width={650}
-		                    height={200}
 		                    alt={blob?.alternativeText}
-		                    loading="eager"
+		                    width={650}
+		                    height={710.5}
+		                    sizes="(min-width: 1440px) 534px, (min-width: 640px) 500px, 100vw"
+		                    priority
 		                  />
 		                </div>
 		              </div>
@@ -135,7 +151,7 @@ const Hero = async (props: any) => {
 
 		                    <div className="bg-primary flex items-center justify-center w-[80px] rounded-r-xl">
 		                      <div className="w-auto h-[22px]">
-		                        <Image className="w-full h-full" src={locationIcon} alt=""/>
+		                        <Image className="w-full h-full" src={locationIcon} alt=""priority/>
 		                      </div>
 		                    </div>
 		                  </div>
@@ -155,11 +171,9 @@ const Hero = async (props: any) => {
 		                <Image
 		                  className="w-full h-full object-cover"
 		                  src={blob?.url}
-		                  width={640}
-		                  height={200}
-		                  sizes="(max-width: 425px) 100vw,640px"
 		                  alt={blob?.alternativeText}
-		                  loading="eager"
+		                  fill
+		                  priority
 		                />
 		              </div>
 		            </div>

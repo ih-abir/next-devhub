@@ -6,7 +6,25 @@ import Brand from "@images/nusa-ceningan-io-logo.svg";
 import styles from "@styles/footer.module.scss";
 import ClipPathSVG from "@components/ClipPathSVG";
 
-const Footer = async ({genericElement}: {genericElement: any}) => {
+interface MenuItem {
+  Title: string;
+  Title_url: string;
+}
+
+interface BlobAttributes {
+  url: string;
+  alternativeText?: string;
+}
+
+interface FooterProps {
+  Footer_menu: MenuItem[];
+  Instagram_link?: string;
+  Footer_copyright: string;
+  Footer_image: { data: { attributes: BlobAttributes } };
+  Footer_image_sm: { data: { attributes: BlobAttributes } };
+}
+
+const Footer = async ({genericElement}: {genericElement: FooterProps}) => {
 
   const {
     Footer_menu: menu,
@@ -74,7 +92,7 @@ const Footer = async ({genericElement}: {genericElement: any}) => {
                   styles.footerLinkContainer
                 ].join(' ')}
               >
-                {menu.map(({ Title, Title_url }: { Title: string; Title_url: string }) => (
+                {menu.map(({ Title, Title_url }) => (
                   <Link
                     key={Title_url}
                     href={Title_url === '/' ? '/' : `/${Title_url}/`}
@@ -86,7 +104,7 @@ const Footer = async ({genericElement}: {genericElement: any}) => {
               </div>
             </div>
             <div className="flex justify-center items-center mt-11 py-[5px] bg-viridian/25">
-              <Link href={Instagram_link} aria-label="Instagram">
+              <Link href={Instagram_link || ""} aria-label="Instagram">
                 <div className="w-full h-[clamp(33px,4vw+1.5px,50px)]">
                   <Image src={CameraIcon} alt="Instagram" width={50} height={50} />
                 </div>
