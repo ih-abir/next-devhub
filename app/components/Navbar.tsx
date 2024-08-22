@@ -29,11 +29,14 @@ const Navbar = async () => {
         ].join(' ')}
       >
         <div className="my-auto">
-          <Link href={domain} aria-label="home">
+          <Link aria-label="home" href={domain}>
             <Image
               className="w-full h-9 md:h-10 my-auto invert md:invert-0 brightness-0 md:brightness-100"
               src={Brand}
               alt="Brand-icon"
+              width={66}
+              height={40}
+              priority
             />
           </Link>
         </div>
@@ -94,7 +97,14 @@ const Navbar = async () => {
 
           <Link href={Instagram_link} aria-label="Instagram" className="flex-none">
             <div className="h-[clamp(28px,4vw+1.4px,33px)]">
-              <Image className="w-full h-full" src={CameraIcon} alt="" />
+              <Image 
+                className="w-full h-full"
+                src={CameraIcon}
+                alt=""
+                width={33}
+                height={33}
+                priority
+              />
             </div>
           </Link>
         </div>
