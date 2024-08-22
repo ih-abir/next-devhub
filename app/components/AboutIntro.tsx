@@ -67,7 +67,7 @@ const AboutIntro = async () => {
                 width={640}
                 height={705}
                 sizes="(min-width: 1280px) 640px, (min-width: 768px) 320px, calc(100vw-64px)"
-                alt={blob.alternativeText}
+                alt={blob?.alternativeText}
               />
             </div>
           </div>
