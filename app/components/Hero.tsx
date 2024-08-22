@@ -132,7 +132,7 @@ const Hero = async (props: HeroProps) => {
 		                    alt={blob?.alternativeText}
 		                    width={650}
 		                    height={710.5}
-		                    sizes="(min-width: 640px) 500px, 100vw"
+		                    sizes="(min-width: 1440px) 534px, (min-width: 640px) 500px, 100vw"
 		                    priority
 		                  />
 		                </div>
