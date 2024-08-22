@@ -104,7 +104,7 @@ const Footer = async ({genericElement}: {genericElement: FooterProps}) => {
               </div>
             </div>
             <div className="flex justify-center items-center mt-11 py-[5px] bg-viridian/25">
-              <Link href={Instagram_link} aria-label="Instagram">
+              <Link href={Instagram_link || ""} aria-label="Instagram">
                 <div className="w-full h-[clamp(33px,4vw+1.5px,50px)]">
                   <Image src={CameraIcon} alt="Instagram" width={50} height={50} />
                 </div>
