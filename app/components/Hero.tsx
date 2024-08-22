@@ -78,9 +78,8 @@ const Hero = async (props: HeroProps) => {
 		            <Image
 		              className="absolute inset-x-0 top-3 sm:top-0 z-10 h-auto sm:h-full w-full"
 		              src={HeaderTxtBg}
-		              width={200}
-		              height={200}
 		              alt=""
+		              priority
 		            />
 		            <h1
 		              className={[
@@ -130,10 +129,11 @@ const Hero = async (props: HeroProps) => {
 		                  <Image
 		                    className="w-full h-full"
 		                    src={blob?.url}
-		                    width={650}
-		                    height={200}
 		                    alt={blob?.alternativeText}
-		                    loading="eager"
+		                    width={650}
+		                    height={710.5}
+		                    sizes="(min-width: 640px) 500px, 100vw"
+		                    priority
 		                  />
 		                </div>
 		              </div>
@@ -151,7 +151,7 @@ const Hero = async (props: HeroProps) => {
 
 		                    <div className="bg-primary flex items-center justify-center w-[80px] rounded-r-xl">
 		                      <div className="w-auto h-[22px]">
-		                        <Image className="w-full h-full" src={locationIcon} alt=""/>
+		                        <Image className="w-full h-full" src={locationIcon} alt=""priority/>
 		                      </div>
 		                    </div>
 		                  </div>
@@ -171,11 +171,9 @@ const Hero = async (props: HeroProps) => {
 		                <Image
 		                  className="w-full h-full object-cover"
 		                  src={blob?.url}
-		                  width={640}
-		                  height={200}
-		                  sizes="(max-width: 425px) 100vw,640px"
 		                  alt={blob?.alternativeText}
-		                  loading="eager"
+		                  fill
+		                  priority
 		                />
 		              </div>
 		            </div>
