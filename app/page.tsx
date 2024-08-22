@@ -104,7 +104,6 @@ const Homepage = async () => {
                             src={blob?.url}
                             width={230}
                             height={167}
-                            sizes="167px"
                             alt={blob.alternativeText}
                           />
                         </Link>
