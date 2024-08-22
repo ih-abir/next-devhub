@@ -8,6 +8,23 @@ import ClipPathSVG from "@components/ClipPathSVG";
 import PlaybtnIcon from "@images/playbtn.svg";
 import HomeAboutBg from "@images/homeAboutBg.svg";
 
+interface BlobAttributes {
+  url: string;
+  alternativeText?: string;
+}
+
+interface AboutIntroProps {
+  About_intro_title: string;
+  About_intro_text: string;
+  About_intro_button_text: string;
+  About_intro_button_link: string;
+  About_intro_blob: {
+    data: {
+      attributes: BlobAttributes;
+    };
+  };
+}
+
 const AboutIntro = async () => {
   const genericElement = await CMS.get('genericElement');
 
@@ -19,7 +36,7 @@ const AboutIntro = async () => {
     About_intro_blob: {
       data: { attributes: blob },
     },
-  } = genericElement;
+  }: AboutIntroProps = genericElement;
 
   return (
     <div
