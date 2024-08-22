@@ -13,7 +13,7 @@ const { publicRuntimeConfig } = getConfig();
 const domain = publicRuntimeConfig.siteOrigin;
 
 interface Props {
-  menu: Record<string, any>;
+  menu: { Title: string; Title_url: string }[];
   Instagram_link?: string;
 }
 
