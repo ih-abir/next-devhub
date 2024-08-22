@@ -10,24 +10,18 @@ import HomeAboutBg from "@images/homeAboutBg.svg";
 
 interface BlobAttributes {
   url: string;
-  alternativeText?: string;
+  alternativeText: string;
 }
 
-interface AboutIntroProps {
+interface HeroProps {
   About_intro_title: string;
-  About_intro_text: string;
-  About_intro_button_text: string;
-  About_intro_button_link: string;
-  About_intro_blob: {
-    data: {
-      attributes: BlobAttributes;
-    };
-  };
+  About_intro_text?: string;
+  About_intro_button_text?: string;
+  About_intro_button_link?: string;
+  About_intro_blob?: { data: { attributes: BlobAttributes } };
 }
 
 const AboutIntro = async () => {
-  const genericElement = await CMS.get('genericElement');
-
   const {
     About_intro_title: title,
     About_intro_text: intro_text,
@@ -36,7 +30,7 @@ const AboutIntro = async () => {
     About_intro_blob: {
       data: { attributes: blob },
     },
-  }: AboutIntroProps = genericElement;
+  } = await CMS.get('genericElement');
 
   return (
     <div
