@@ -17,11 +17,11 @@ interface BlobAttributes {
 }
 
 interface FooterProps {
-  menu: MenuItem[];
+  Footer_menu: MenuItem[];
   Instagram_link?: string;
-  copyright: string;
-  background: BlobAttributes;
-  BlobAttributes: BlobAttributes;
+  Footer_copyright: string;
+  Footer_image: { data: { attributes: BlobAttributes } };
+  Footer_image_sm: { data: { attributes: BlobAttributes } };
 }
 
 const Footer = async ({genericElement}: {genericElement: FooterProps}) => {
