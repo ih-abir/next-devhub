@@ -216,10 +216,10 @@ const Homepage = async () => {
                         <Image
                           className="w-full h-full object-cover z-10"
                           src={blob?.url}
-                          sizes="(max-width: 1023px) 100vw, 470px"
-                          width="200"
-                          height="200"
                           alt={blob.alternativeText}
+                          width={386}
+                          height={488}
+                          sizes="(min-width: 1280px) 386px, (min-width: 1024px) 297px, 270px"
                         />
                       </div>
 
