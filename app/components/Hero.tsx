@@ -8,16 +8,31 @@ import locationIcon from "@images/location.svg";
 import styles from '@styles/hero.module.scss';
 import ClipPathSVG from "@components/ClipPathSVG";
 
-const Hero = async (props: any) => {
-	const {
-		Title: title,
-		Title_tag: title_tag,
-		Intro_text: intro_text,
-		Intro_button_text: btnText,
-  	Intro_button_link: link,
-		Intro_blob: intro_blob,
-		Intro_blob_place_text: blob_place_text,
-	} = props;
+interface Blob {
+  url: string;
+  alternativeText: string;
+}
+
+interface HeroProps {
+  Title: string;
+  Title_tag?: string;
+  Intro_text: string;
+  Intro_button_text?: string;
+  Intro_button_link?: string;
+  Intro_blob?: { data: { attributes: Blob } };
+  Intro_blob_place_text?: string;
+}
+
+const Hero = async (props: HeroProps) => {
+  const {
+    Title: title,
+    Title_tag: title_tag,
+    Intro_text: intro_text,
+    Intro_button_text: btnText,
+    Intro_button_link: link,
+    Intro_blob: intro_blob,
+    Intro_blob_place_text: blob_place_text,
+  } = props;
 
 	const blob = intro_blob?.data?.attributes;
 
@@ -34,7 +49,8 @@ const Hero = async (props: any) => {
 		    >
 		      <div
 		        className={blob
-		          ? `${styles.headerContentContainer} bg-white/80 lg:bg-transparent rounded-[35px] lg:rounded-none`
+		          ? `${styles.headerContentContainer} bg-white/80
+		          		lg:bg-transparent rounded-[35px] lg:rounded-none`
 		          : "max-w-[1024px] text-center"}
 		      >
 		        {
