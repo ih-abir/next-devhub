@@ -273,13 +273,13 @@ const Homepage = async () => {
                     >
                       {page.Boat_intro_button_text}
                       <div className="h-3.5 ml-2.5">
-                        <Image className="w-full h-full" width={50} height={50} src={PlaybtnIcon} alt="" />
+                        <Image className="w-full h-full" src={PlaybtnIcon} alt="" />
                       </div>
                     </Link>
                   </div>
                 </div>
                 <div className="relative order-1 md:order-2 flex justify-center items-center w-full sm:w-2/3 md:w-1/2 lg:w-7/12 px-8 xl:px-3 xl:pl-14 mb-16 md:my-16">
-                  <Image className="w-full h-full" width={50} height={50} src={CompanySecBg} alt="" />
+                  <Image className="w-full h-full" src={CompanySecBg} alt="" />
                   <div className="flex flex-wrap justify-center items-center absolute inset-0 z-20">
                     <div className="-mt-10 sm:-mt-20">
                       {boats.slice(0, 3).map((data: any, idx: number) => (
@@ -307,7 +307,7 @@ const Homepage = async () => {
                                     src={logo.url}
                                     width={logo.width}
                                     height={logo.height}
-                                    sizes="(max-width: 425px) 100vw, (max-width: 1023px) 121px, 186px"
+                                    sizes="(min-width: 1200px) 186px, (min-width: 768px) 100px, 121px"
                                     alt={logo.alternativeText}
                                   />
                                 </div>
