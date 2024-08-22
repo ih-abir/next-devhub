@@ -102,9 +102,9 @@ const Homepage = async () => {
                           <Image
                             className="w-full h-full object-cover"
                             src={blob?.url}
+                            alt={blob.alternativeText}
                             width={230}
                             height={167}
-                            alt={blob.alternativeText}
                           />
                         </Link>
                       </div>
@@ -305,10 +305,10 @@ const Homepage = async () => {
                                   <Image
                                     className="w-full h-full object-contain"
                                     src={logo.url}
+                                    alt={logo.alternativeText}
                                     width={logo.width}
                                     height={logo.height}
                                     sizes="(min-width: 1200px) 186px, (min-width: 768px) 100px, 121px"
-                                    alt={logo.alternativeText}
                                   />
                                 </div>
                               </div>
