@@ -20,11 +20,11 @@ const Navbar = async () => {
   const url = "/";
 
   return (
-    <nav className="relative z-40 flex pt-3 navbar">
+    <nav className={`relative z-40 flex pt-3 ${styles.navbar}`}>
       <div
         className={[
-          "wrapper inline-flex flex-wrap md:flex-nowrap justify-center my-auto",
-          "px-5 sm:px-8 xl:px-3 sm:py-1 md:py-2 ",
+          "wrapper inline-flex flex-wrap md:flex-nowrap",
+          "justify-center my-auto px-5 sm:px-8 xl:px-3 sm:py-1 md:py-2",
           styles.navbarContent
         ].join(' ')}
       >
@@ -42,7 +42,7 @@ const Navbar = async () => {
         </div>
         <div
           className={[
-            "flex flex-wrap md:flex-nowrap items-center justify-center ml-auto my-auto roboto",
+            "roboto flex flex-wrap md:flex-nowrap items-center justify-center ml-auto my-auto",
             "text-sm md:font-[550] tracking-[0.03em] text-white md:text-black no-underline",
             styles.navMenu
           ].join(' ')}
@@ -87,15 +87,15 @@ const Navbar = async () => {
 
         <div
           className={[
-            "inline-flex gap-4 lg:gap-8 justify-center items-center",
-            "my-auto w-full md:w-auto mt-1.5 sm:my-auto",
+            "inline-flex gap-4 lg:gap-8 justify-center",
+            "items-center my-auto w-full md:w-auto mt-1.5 sm:my-auto",
           ].join(' ')}
         >
           <div className="relative grow">
             {/*<Search />*/}
           </div>
 
-          <Link href={Instagram_link} aria-label="Instagram" className="flex-none">
+          <Link aria-label="Instagram" href={Instagram_link} className="flex-none">
             <div className="h-[clamp(28px,4vw+1.4px,33px)]">
               <Image 
                 className="w-full h-full"
