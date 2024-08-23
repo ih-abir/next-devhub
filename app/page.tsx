@@ -105,6 +105,7 @@ const Homepage = async () => {
                             alt={blob.alternativeText}
                             width={230}
                             height={167}
+                            sizes="(max-width: 640px) 230px, 230px"
                           />
                         </Link>
                       </div>
