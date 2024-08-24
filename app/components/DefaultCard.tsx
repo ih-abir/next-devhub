@@ -4,13 +4,15 @@ import Markdown from "react-markdown";
 import PlaybtnIcon from "@images/playbtn.svg";
 import styles from '@styles/default-card.module.scss';
 
+interface BlobAttributes {
+  url: string;
+  alternativeText: string;
+}
+
 type DefaultCardProps = {
   Title: string;
   Description: string;
-  Intro_blob: {
-    url: string;
-    alternativeText?: string;
-  };
+  Intro_blob?: { data: { attributes: BlobAttributes } };
   intro_text: string;
   google_place_id?: string;
   Book_link?: string;
