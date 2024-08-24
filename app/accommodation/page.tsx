@@ -24,7 +24,7 @@ const HomeAccommodation = async () => {
           role="list"
           className="grid grid-cols-[repeat(auto-fit,minmax(0,280px))] lg:grid-cols-3 gap-[35px] justify-center"
         >
-          {posts.map((post, index) => (
+          {posts.map((post: any, index: number) => (
             <DefaultCard key={index} {...post} />
           ))}
         </div>
