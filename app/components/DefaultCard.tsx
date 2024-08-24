@@ -4,34 +4,36 @@ import Markdown from "react-markdown";
 import PlaybtnIcon from "@images/playbtn.svg";
 import styles from '@styles/default-card.module.scss';
 
-type Props = {
-  title: string;
-  slug: string;
-  blob: {
+type DefaultCardProps = {
+  Title: string;
+  Description: string;
+  Intro_blob: {
     url: string;
-    width: number;
-    height: number;
     alternativeText?: string;
   };
   intro_text: string;
-  googleData: {
+  google_place_id?: string;
+  Book_link?: string;
+  googleMapsData?: {
     rating: number;
     user_ratings_total: number;
   };
-  Book_link?: string;
+  Meta: { URL_slug: string },
 };
 
-export default function Card({
-  Title: title,
-  Description: description,
-  Intro_blob: {
-    data: { attributes: blob },
-  },
-  google_place_id,
-  slug,
-  Book_link,
-  googleMapsData,
-}: Props.post) {
+const DefaultCard = async (props: DefaultCardProps) => {
+  const {
+    Title: title,
+    Description: description,
+    Intro_blob: {
+      data: { attributes: blob },
+    },
+    google_place_id,
+    Book_link,
+    googleMapsData,
+    Meta: { URL_slug },
+  } = props;
+
   const [intro_text] = description.split("\n");
 
   return (
@@ -41,7 +43,7 @@ export default function Card({
       aria-label={title}
     >
       <div className={`${styles.defaultCardImgContainer} overflow-hidden`}>
-        <a href={`/${slug}/`} className="cursor-pointer">
+        <a href={`/${URL_slug }/`} className="cursor-pointer">
           <div className="w-full h-full">
             <Image
               className="w-full h-full object-cover"
@@ -57,7 +59,7 @@ export default function Card({
       </div>
       <div className="px-4 pt-4 pb-5 lg:pb-8">
         <div className="mb-2 text-xl font-bold text-greenpea">
-          <a href={`/${slug}/`} className="cursor-pointer">
+          <a href={`/${URL_slug }/`} className="cursor-pointer">
             {title}
           </a>
         </div>
@@ -79,7 +81,7 @@ export default function Card({
         {Book_link && (
           <div className="flex items-center mt-5">
             <a
-              href={`/${slug}/`}
+              href={`/${URL_slug }/`}
               className={[
                 "bg-downy flex items-center px-5 py-2 roboto",
                 "text-xs lg:text-sm font-medium cursor-pointer rounded-full"
@@ -96,3 +98,5 @@ export default function Card({
     </div>
   );
 }
+
+export default DefaultCard;
