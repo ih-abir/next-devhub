@@ -1,3 +1,4 @@
+import Link from "next/link";
 import Image from "next/image";
 import Markdown from "react-markdown";
 
@@ -9,31 +10,24 @@ interface BlobAttributes {
   alternativeText: string;
 }
 
-type DefaultCardProps = {
+interface DefaultCardProps {
   Title: string;
   Description: string;
-  Intro_blob?: { data: { attributes: BlobAttributes } };
-  intro_text: string;
+  Intro_blob: {data : {attributes: BlobAttributes}};
+  Book_link: string;
   google_place_id?: string;
-  Book_link?: string;
-  googleMapsData?: {
-    rating: number;
-    user_ratings_total: number;
-  };
-  Meta: { URL_slug: string },
-};
+  Meta: { URL_slug: string };
+}
 
-const DefaultCard = async (props: DefaultCardProps) => {
+const DefaultCard = async ( props: DefaultCardProps ) => {
+
   const {
     Title: title,
     Description: description,
-    Intro_blob: {
-      data: { attributes: blob },
-    },
-    google_place_id,
+    Intro_blob: { data: { attributes: blob } },
     Book_link,
-    googleMapsData,
-    Meta: { URL_slug },
+    google_place_id,
+    Meta: { URL_slug: slug }
   } = props;
 
   const [intro_text] = description.split("\n");
@@ -45,7 +39,7 @@ const DefaultCard = async (props: DefaultCardProps) => {
       aria-label={title}
     >
       <div className={`${styles.defaultCardImgContainer} overflow-hidden`}>
-        <a href={`/${URL_slug }/`} className="cursor-pointer">
+        <Link href={`/${slug}/`} className="cursor-pointer">
           <div className="w-full h-full">
             <Image
               className="w-full h-full object-cover"
@@ -57,13 +51,13 @@ const DefaultCard = async (props: DefaultCardProps) => {
                 (min-width: 345px) 280px, calc(100vw - 64px)"
             />
           </div>
-        </a>
+        </Link>
       </div>
       <div className="px-4 pt-4 pb-5 lg:pb-8">
         <div className="mb-2 text-xl font-bold text-greenpea">
-          <a href={`/${URL_slug }/`} className="cursor-pointer">
+          <Link href={`/${slug}/`} className="cursor-pointer">
             {title}
-          </a>
+          </Link>
         </div>
         <div className="prose mb-2 leading-[120%] line-clamp-3">
           <Markdown>{intro_text}</Markdown>
@@ -82,8 +76,8 @@ const DefaultCard = async (props: DefaultCardProps) => {
         </div>*/}
         {Book_link && (
           <div className="flex items-center mt-5">
-            <a
-              href={`/${URL_slug }/`}
+            <Link
+              href={`/${slug}/`}
               className={[
                 "bg-downy flex items-center px-5 py-2 roboto",
                 "text-xs lg:text-sm font-medium cursor-pointer rounded-full"
@@ -93,7 +87,7 @@ const DefaultCard = async (props: DefaultCardProps) => {
               <div className="h-3.5 ml-2.5">
                 <Image className="w-full h-full" src={PlaybtnIcon} alt="" />
               </div>
-            </a>
+            </Link>
           </div>
         )}
       </div>
