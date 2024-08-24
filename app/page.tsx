@@ -32,7 +32,8 @@ const Homepage = async () => {
   const page = await CMS.get('homepage'),
     todos = await CMS.get('todos'),
     accommodationsData = await CMS.get('accommodations'),
-    boatsData = await CMS.get('boats');
+    boatsData = await CMS.get('boats'),
+    homeTodoData = await CMS.get('homeTodo');
     // console.log(boats)
 
     const accommodations = accommodationsData

@@ -131,7 +131,7 @@ const Hero = async (props: HeroProps) => {
 		                    src={blob?.url}
 		                    alt={blob?.alternativeText}
 		                    width={534}
-		                    height={583}
+		                    height={534}
 		                    sizes="(min-width: 1440px) 534px, (min-width: 640px) 500px, 100vw"
 		                    priority
 		                  />
