@@ -47,8 +47,10 @@ export default function Card({
               className="w-full h-full object-cover"
               src={blob?.url}
               alt={blob?.alternativeText}
-              width={280}
-              height={280}
+              width={386}
+              height={308}
+              sizes="(min-width: 1440px) 386px, (min-width: 1024px) 296px,
+                (min-width: 345px) 280px, calc(100vw - 64px)"
             />
           </div>
         </a>
