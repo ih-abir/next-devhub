@@ -31,7 +31,7 @@ export default function Card({
   slug,
   Book_link,
   googleMapsData,
-}: Props) {
+}: Props.post) {
   const [intro_text] = description.split("\n");
 
   return (
