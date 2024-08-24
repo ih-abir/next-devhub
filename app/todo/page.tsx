@@ -20,7 +20,7 @@ const HomeTodo = async () => {
     <>
       <Hero Title={Title} Intro_text={Intro_text} Intro_blob={Intro_blob} />
 
-      <div class="wrapper overflow-x-hidden px-8 xl:px-3 py-36 mx-auto">
+      <div classname="wrapper overflow-x-hidden px-8 xl:px-3 py-36 mx-auto">
         <div
           role="list"
           className="grid grid-cols-[repeat(auto-fit,minmax(0,280px))] lg:grid-cols-3 gap-[35px] justify-center"
