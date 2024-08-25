@@ -64,10 +64,10 @@ const AboutIntro = async () => {
               <Image
                 className="w-full h-full object-cover"
                 src={blob?.url}
+                alt={blob?.alternativeText}
                 width={640}
                 height={705}
-                sizes="(min-width: 1280px) 640px, (min-width: 768px) 320px, calc(100vw-64px)"
-                alt={blob?.alternativeText}
+                sizes="(min-width: 1280px) 640px, (min-width: 768px) 320px, calc(100vw - 64px)"
               />
             </div>
           </div>
