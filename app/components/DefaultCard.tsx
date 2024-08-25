@@ -47,8 +47,10 @@ const DefaultCard = async ( props: DefaultCardProps ) => {
               alt={blob?.alternativeText}
               width={386}
               height={308}
-              sizes="(min-width: 1440px) 386px, (min-width: 1024px) 296px,
-                (min-width: 345px) 280px, calc(100vw - 64px)"
+              sizes={[
+                "(min-width: 1440px) 386px, (min-width: 1024px) 296px",
+                "(min-width: 345px) 280px, calc(100vw - 64px)"
+              ].join(',')}
             />
           </div>
         </Link>
