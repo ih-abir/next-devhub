@@ -34,9 +34,9 @@ const DefaultCard = async ( props: DefaultCardProps ) => {
 
   return (
     <div
-      className={`${styles.defaultCard} bg-white overflow-hidden rounded-[24px]`}
       role="listitem"
       aria-label={title}
+      className={`${styles.defaultCard} bg-white overflow-hidden rounded-[24px]`}
     >
       <div className={`${styles.defaultCardImgContainer} overflow-hidden`}>
         <Link href={`/${slug}/`} className="cursor-pointer">
