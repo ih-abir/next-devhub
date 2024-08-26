@@ -14,8 +14,8 @@ type BlobAttributes = {
 type PageProps = {
   Title: string;
   Description: string;
-  Intro_blob: Record<string, any>;
-  Block_blob?: { data: { attributes: BlobAttributes } };
+  Intro_blob: { data: { attributes: BlobAttributes } };
+  Block_blob: { data: { attributes: BlobAttributes } };
   Book_link: string;
   Meta: { URL_slug: string };
 };
@@ -40,8 +40,8 @@ const PostDetails = async(props: PageProps) => {
         Title={Title}
         Intro_text={intro_text}
         Intro_blob={Intro_blob}
-        link={Book_link}
-        btnText="Book Now"
+        Intro_button_link={Book_link}
+        Intro_button_text="Book Now"
       />
 
       <div className="wrapper mx-auto px-8 xl:px-3 py-10 pb-20 overflow-x-hidden">
