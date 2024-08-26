@@ -8,11 +8,7 @@ export async function generateStaticParams() {
   return todos.map(({ Meta: { URL_slug } }) => ({ slug: URL_slug }));
 }
 
-export default function AccommodationPage({
-  params: { slug },
-}: {
-  params: { slug: string };
-}) {
+export default function AccommodationPage({ params: { slug }}) {
   const todo =
     todos.find(({ Meta: { URL_slug } }) => URL_slug === slug) ??
     notFound();
