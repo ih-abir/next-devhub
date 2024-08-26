@@ -20,7 +20,7 @@ type PageProps = {
   Meta: { URL_slug: string };
 };
 
-const Component = async(props: PageProps) => {
+const PostDetails = async(props: PageProps) => {
 
   const {
     Title,
@@ -152,4 +152,4 @@ const Component = async(props: PageProps) => {
   );
 };
 
-export default Component;
+export default PostDetails;
