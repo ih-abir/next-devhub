@@ -10,43 +10,7 @@ function importAll(r) {
 
 const queryModules = importAll(require.context('@queries', false, /\.js$/));
 
-
 const queryRegex = /^\s*{(.*)}\s*$/s;
-
-// const fullQuery =
-//   `"{
-    
-//           homepage {
-//             data {
-//               attributes {
-//                 Title
-//                 Title_tag
-//                 Intro_text
-//                 Intro_button_text
-//                 Intro_button_link
-//                 Intro_blob_place_text
-//                 Todo_title
-//                 Todo_intro_txt
-//                 Todo_intro_button_text
-//                 Todo_intro_button_link
-//                 Todo_button_text_1
-//                 Todo_button_text_2
-//                 Todo_button_text_3
-//                 Accomodation_title
-//                 Accomodation_button_text
-//                 Accomodation_button_link
-//                 Boat_title
-//                 Boat_intro_text
-//                 Boat_intro_button_text
-//                 Boat_intro_button_link
-//                 Instagram_title
-//                 Geo_latitude
-//                 Geo_longitude
-//               }
-//             }
-//           }
-        
-// }"`;
 
 const fullQuery =
   "{" +
@@ -79,18 +43,21 @@ const { data } = await fetch(process.env.DB_URL, {
     return null;
   });
 
-
 const CMS = {
   get: (contentType) => {
-    const content = data?.[contentType === "all" ? 'data' : contentType]?.data;
+    const format = (data) =>
+      Array.isArray(data)
+        ? data.map(({ attributes }) => attributes)
+        : data?.attributes || data;
 
-    return Array.isArray(content) 
-      ? content.map(({ attributes }) => attributes) 
-      : content?.attributes 
-      || null; // Ensure a fallback value if content is undefined
+    const content = data?.[contentType === "all" ? data : contentType]?.data;
+
+    return contentType === "all"
+      ? Object.fromEntries(
+          Object.entries(data).map(([key, { data }]) => [key, format(data)])
+        )
+      : format(content);
   },
 };
 
-
-// console.log(data.todos)
 export default CMS;
