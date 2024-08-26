@@ -51,7 +51,10 @@ const Footer = async ({genericElement}: {genericElement: FooterProps}) => {
 
       <footer className="relative block w-full mt-auto">
         <div
-          className={`relative overflow-hidden bg-lightGreen bg-no-repeat bg-cover ${styles.footer}`}
+          className={[
+            "relative overflow-hidden bg-lightGreen bg-no-repeat bg-cover",
+            styles.footer
+          ].join(' ')}
           role="contentinfo"
         >
           <div className="absolute w-screen h-full z-10">
@@ -77,7 +80,12 @@ const Footer = async ({genericElement}: {genericElement: FooterProps}) => {
             )}
           </div>
           <div className="relative z-20 pt-16 md:pt-36">
-            <div className="wrapper flex flex-wrap justify-center md:justify-start items-center my-auto px-8 xl:px-3 sm:py-2">
+            <div 
+              className={[
+                "wrapper flex flex-wrap items-center my-auto",
+                "justify-center md:justify-start px-8 xl:px-3 sm:py-2"
+              ].join(' ')}
+            >
               <div className="w-full md:w-auto my-auto mb-16 md:mb-0">
                 <Link href="/" aria-label="home">
                   <div className="mx-auto my-auto w-[121px]">

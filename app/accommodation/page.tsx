@@ -25,7 +25,7 @@ const HomeAccommodation = async () => {
           className="grid grid-cols-[repeat(auto-fit,minmax(0,280px))] lg:grid-cols-3 gap-[35px] justify-center"
         >
           {posts.map((post: any, index: number) => (
-            <DefaultCard key={index} {...post} />
+            <DefaultCard key={index} type="accommodationDetails" {...post} />
           ))}
         </div>
       </div>

@@ -29,17 +29,16 @@ function getId(string: string) {
 }
 
 const Homepage = async () => {
-  const page = await CMS.get('homepage'),
-    todos = await CMS.get('todos'),
-    accommodationsData = await CMS.get('accommodations'),
-    boatsData = await CMS.get('boats'),
-    homeTodoData = await CMS.get('homeTodo');
-    // console.log(boats)
+    const {
+      todos,
+      boats,
+      homeTodo,
+      accommodations,
+      homepage: page,
+    } = await CMS.get("all")
 
-    const accommodations = accommodationsData
-      .slice(0, 6)
-      .sort(sortFunction),
-      boats = boatsData.sort(sortFunction);
+    accommodations.slice(0, 6).sort(sortFunction);
+    boats.sort(sortFunction);
 
   return (
     <>

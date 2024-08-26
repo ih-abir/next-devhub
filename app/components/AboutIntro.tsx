@@ -34,7 +34,10 @@ const AboutIntro = async () => {
 
   return (
     <div
-      className="wrapper overflow-x-hidden mx-auto flex flex-wrap justify-center items-center md:justify-start py-20 md:py-32"
+      className={[
+        "wrapper overflow-x-hidden mx-auto flex flex-wrap",
+        "justify-center items-center md:justify-start py-20 md:py-32"
+      ].join(' ')}
     >
       <div className="w-full md:w-1/2 lg:w-7/12 px-8 xl:px-3 pb-12 md:pb-0">
         <div className="relative">
@@ -51,17 +54,20 @@ const AboutIntro = async () => {
           />
 
           <div
-            className="absolute right-0 -top-[35px] md:top-0 bottom-0 z-10 flex w-full max-w-[640px] h-full"
+            className={[
+              "absolute right-0 -top-[35px] md:top-0",
+              "bottom-0 z-10 flex w-full max-w-[640px] h-full"
+            ].join(' ')}
             style={{ clipPath: "url(#about-intro-curve)" }}
           >
             <div className="w-full h-full">
               <Image
                 className="w-full h-full object-cover"
                 src={blob?.url}
+                alt={blob?.alternativeText}
                 width={640}
                 height={705}
-                sizes="(min-width: 1280px) 640px, (min-width: 768px) 320px, calc(100vw-64px)"
-                alt={blob?.alternativeText}
+                sizes="(min-width: 1280px) 640px, (min-width: 768px) 320px, calc(100vw - 64px)"
               />
             </div>
           </div>
@@ -73,7 +79,10 @@ const AboutIntro = async () => {
         <div className="px-8 xl:px-3 md:ml-8 lg:ml-8 xl:ml-16">
           <a href={`/${button_link}/`}>
             <h2
-              className="roboto-serif text-[clamp(2.375rem,6vw+.15rem,3.725rem)] font-medium md:font-normal leading-[3.7rem]"
+              className={[
+                "roboto-serif text-[clamp(2.375rem,6vw+.15rem,3.725rem)]",
+                "font-medium md:font-normal leading-[3.7rem]"
+              ].join(' ')}
             >
               {title}
             </h2>
