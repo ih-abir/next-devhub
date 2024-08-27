@@ -1,9 +1,5 @@
-import Link from "next/link";
-import Image from "next/image";
-import Markdown from "react-markdown";
 import Hero from "@components/Hero";
 import BoatCard from "@components/BoatCard";
-import AboutIntro from "@components/AboutIntro";
 
 import CMS from "@utils/CMS";
 
@@ -24,8 +20,8 @@ const HomeBoat = async () => {
         role="list"
       >
         {posts.map((post: any, index: number) => (
-            <BoatCard key={index} {...post} />
-          ))}
+          <BoatCard key={index} {...post} />
+        ))}
       </div>
     </>
   )
