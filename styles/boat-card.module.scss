@@ -1,0 +1,69 @@
+.boatCard {
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.09);
+}
+
+.boatLogoContainer {
+  height: clamp(36px, 4vw + 1.5px, 52px);
+  width: clamp(36px, 4vw + 1.5px, 52px);
+}
+
+.boatImgContainer {
+  height: clamp(50px, 45vw + 8px, 400px);
+
+  @media (min-width: 768px) {
+    height: 400px;
+  }
+}
+
+.boatCardTxt {
+  font-size: 0.975rem;
+}
+
+.timeTxt {
+  font-size: 1rem;
+}
+
+.boatCardImgContainer {
+  height: clamp(27px, 4vw + 1px, 36px);
+  width: clamp(27px, 4vw + 1px, 36px);
+}
+
+@media (max-width: 474.98px) {
+  .boatCardTxt,
+  .timeTxt {
+    font-size: 0.813rem;
+  }
+}
+
+@media (max-width: 324.98px) {
+  .boatCardTxt,
+  .timeTxt {
+    font-size: 0.675rem;
+  }
+}
+
+.stars-outer {
+  display: flex;
+  position: relative;
+
+  &:before {
+    content: "\2606 \2606 \2606 \2606 \2606";
+    font-size: 11px;
+    color: #b0b0b0;
+  }
+}
+
+.stars-inner {
+  display: flex;
+  position: absolute;
+  top: 0;
+  left: 0;
+  white-space: nowrap;
+  overflow: hidden;
+
+  &:before {
+    content: "\2605 \2605 \2605 \2605 \2605";
+    font-size: 11px;
+    color: #ffd203;
+  }
+}
