@@ -1,5 +1,6 @@
 /** @type {import('next').NextConfig} */
 import path from 'path';
+import withPlaiceholder from "@plaiceholder/next";
 
 const nextConfig = {
    publicRuntimeConfig: {
@@ -25,4 +26,4 @@ const nextConfig = {
   },
 };
 
-export default nextConfig;
+export default withPlaiceholder(nextConfig);
