@@ -1,7 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import Markdown from "react-markdown";
-import { getPlaiceholder } from "plaiceholder";
+import sharp from 'sharp';
 
 import HeaderTxtBg from "@images/txtBg.svg";
 import locationIcon from "@images/location.svg";
@@ -41,9 +41,13 @@ const Hero = async (props: HeroProps) => {
 		const buffer = await fetch(src).then(async (res) =>
 	    Buffer.from(await res.arrayBuffer())
 	  );
-    const { base64 } = await getPlaiceholder(buffer);
 
-    return base64;
+    const base64 = await sharp(Buffer.from(buffer))
+	    .resize({ width: 10 })
+	    .toBuffer()
+	    .then((data) => `data:image/jpeg;base64,${data.toString('base64')}`);
+
+	  return base64;
   };
 
 	return (
