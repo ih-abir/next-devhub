@@ -37,7 +37,7 @@ interface BoatCardProps {
   Homepage_link?: string;
   Book_link?: string;
   Tripadvisor_link?: string;
-  Departure: DepartureAttributes;
+  Departure: DepartureAttributes[];
 }
 
 const BoatCard = async ( props: BoatCardProps ) => {
@@ -67,7 +67,7 @@ const BoatCard = async ( props: BoatCardProps ) => {
   //     return b.rating - a.rating;
   //   });
 
-  const [boat_time] = departure.map(({ Time }) => Time),
+  const boat_time = departure.flatMap(({ Time }) => Time),
     boat_Departure = boat_time
       ?.map(({ Departure_time }) => Departure_time)
       .filter((x) => x),
@@ -75,13 +75,13 @@ const BoatCard = async ( props: BoatCardProps ) => {
       ?.map(({ Return_time }) => Return_time)
       .filter((x) => x);
 
-  function hourFormat(timeString) {
+  function hourFormat(timeString: string): string {
     const [hourString, minute] = timeString.split(":");
     const hour = +hourString % 24;
     return (hour % 12 || 12) + "." + minute;
   }
 
-  function formatTime(timeString) {
+  function formatTime(timeString: string): string {
     const [hourString, minute] = timeString.split(":");
     const hour = +hourString % 24;
     return hour < 12 ? "\xa0AM" : "\xa0PM";
@@ -138,7 +138,7 @@ const BoatCard = async ( props: BoatCardProps ) => {
           {
             boat_Departure?.length > 0 && boat_Return?.length > 0 && (
               <div className="w-full sm:w-4/5 md:w-full grid grid-cols-5 gap-x-2.5 gap-y-3 mb-8">
-                {departure.map((item: DepartureAttributes, idx: string) => (
+                {departure.map((item: DepartureAttributes, idx: number) => (
                   <React.Fragment key={idx}>
                     <div className="col-span-2">
                       <div className={[styles.boatCardTxt, "font-bold"].join(' ')}>
@@ -189,14 +189,11 @@ const BoatCard = async ( props: BoatCardProps ) => {
                         </div>
 
                         <div className="col-auto justify-center items-center text-center">
-                          {item.Time.map(
-                            ({ Departure_time }: DepartureTimeAttributes) =>
-                              Departure_time && (
-                                <div className={[styles.timeTxt, "leading-[175%]"].join(' ')}>
-                                  {hourFormat(Departure_time)}
-                                  {formatTime(Departure_time)}
-                                </div>
-                              )
+                          {item.Time.Departure_time && (
+                            <div className={[styles.timeTxt, "leading-[175%]"].join(' ')}>
+                              {hourFormat(item.Time.Departure_time)}
+                              {formatTime(item.Time.Departure_time)}
+                            </div>
                           )}
                         </div>
                         <div className="col-span-2">
@@ -258,14 +255,11 @@ const BoatCard = async ( props: BoatCardProps ) => {
                           </div>
                         </div>
                         <div className="col-auto justify-center items-center text-center">
-                          {item.Time.map(
-                            ({ Return_time }: DepartureTimeAttributes) =>
-                              Return_time && (
-                                <div className={[styles.timeTxt, "leading-[175%]"].join(' ')}>
-                                  {hourFormat(Return_time)}
-                                  {formatTime(Return_time)}
-                                </div>
-                              )
+                          {item.Time.Return_time && (
+                            <div className={[styles.timeTxt, "leading-[175%]"].join(' ')}>
+                              {hourFormat(item.Time.Return_time)}
+                              {formatTime(item.Time.Return_time)}
+                            </div>
                           )}
                         </div>
                         <div className="col-span-2">
@@ -388,27 +382,37 @@ const BoatCard = async ( props: BoatCardProps ) => {
             <div
               className="flex flex-wrap items-center lg:justify-between gap-3 sm:gap-x-10 mt-14"
             >
-              <Link
-                href={Homepage_link}
-                className={[
-                  "flex font-semibold leading-4",
-                  "capitalize color-green-pea underline-animated"
-                ].join(' ')}
-              >
-                Visit Site
-              </Link>
-              <Link
-                href={Book_link}
-                className={[
-                  "inline-flex items-center justify-center",
-                  "py-1.5 px-5 font-medium rounded-full bg-downy"
-                ].join(' ')}
-              >
-                Book now
-                <div className="h-3.5 ml-2.5">
-                  <Image className="w-full h-full" src={PlaybtnIcon} />
-                </div>
-              </Link>
+              {
+                Homepage_link && (
+                  <Link
+                    href={Homepage_link}
+                    className={[
+                      "flex font-semibold leading-4",
+                      "capitalize color-green-pea underline-animated"
+                    ].join(' ')}
+                  >
+                    Visit Site
+                  </Link>
+                )
+              }
+
+
+              {
+                Book_link && (
+                  <Link
+                    href={Book_link}
+                    className={[
+                      "inline-flex items-center justify-center",
+                      "py-1.5 px-5 font-medium rounded-full bg-downy"
+                    ].join(' ')}
+                  >
+                    Book now
+                    <div className="h-3.5 ml-2.5">
+                      <Image className="w-full h-full" src={PlaybtnIcon} alt=""/>
+                    </div>
+                  </Link>
+                )
+              }
             </div>
           </div>
         </div>
