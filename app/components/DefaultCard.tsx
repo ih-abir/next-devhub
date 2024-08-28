@@ -2,12 +2,20 @@ import Link from "next/link";
 import Image from "next/image";
 import Markdown from "react-markdown";
 
+import CMS from "@utils/CMS";
+
 import PlaybtnIcon from "@images/playbtn.svg";
 import styles from '@styles/default-card.module.scss';
 
 interface BlobAttributes {
   url: string;
   alternativeText: string;
+}
+
+interface GoogleDataAttributes {
+  place_id: string;
+  rating: number;
+  user_ratings_total: number;
 }
 
 interface DefaultCardProps {
@@ -31,9 +39,16 @@ const DefaultCard = async ( props: DefaultCardProps ) => {
     google_place_id,
     Meta: { URL_slug }
   } = props;
-
+    
   const [intro_text] = description.split("\n"),
      slug = `/${type === "todoDetails" ? "todo" : "accommodation"}/${URL_slug}/`;
+
+  const mapsData = await CMS.get('googleMapsData'),
+    googleMapsData: GoogleDataAttributes[] = JSON.parse(mapsData.data);
+
+  const [googleData] = googleMapsData?.filter(
+    ({ place_id }) => place_id === google_place_id
+  );
 
   return (
     <div
@@ -67,10 +82,15 @@ const DefaultCard = async ( props: DefaultCardProps ) => {
         <div className="prose mb-2 leading-[120%] line-clamp-3">
           <Markdown>{intro_text}</Markdown>
         </div>
-        {/*<div className="flex items-center gap-1 md:gap-2.5">
-          <div className="stars-outer flex my-auto text-sm sm:text-base">
+        <div className="flex items-center gap-1 md:gap-2.5">
+          <div 
+            className={[
+              styles.starsOuter,
+              "flex my-auto text-sm sm:text-base font-bold"
+            ].join(' ')}
+          >
             <div
-              className="stars-inner flex text-sm sm:text-base"
+              className={[styles.starsInner, "flex text-sm sm:text-base font-bold"].join(' ')}
               style={{ width: `${googleData?.rating * 20}%` }}
             />
           </div>
@@ -78,7 +98,7 @@ const DefaultCard = async ( props: DefaultCardProps ) => {
             <div className="sm:text-[17px] font-semibold">{googleData?.rating}</div>
             <div className="text-[13px] font-medium">({googleData?.user_ratings_total})</div>
           </div>
-        </div>*/}
+        </div>
         {Book_link && (
           <div className="flex items-center mt-5">
             <Link
