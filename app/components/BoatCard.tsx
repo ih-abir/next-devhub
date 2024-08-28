@@ -390,13 +390,19 @@ const BoatCard = async ( props: BoatCardProps ) => {
             >
               <Link
                 href={Homepage_link}
-                className="leading-4 font-semibold capitalize color-green-pea flex underline-animated"
+                className={[
+                  "flex font-semibold leading-4",
+                  "capitalize color-green-pea underline-animated"
+                ].join(' ')}
               >
                 Visit Site
               </Link>
               <Link
                 href={Book_link}
-                className="py-1.5 px-5 inline-flex items-center justify-center font-medium rounded-full bg-downy"
+                className={[
+                  "inline-flex items-center justify-center",
+                  "py-1.5 px-5 font-medium rounded-full bg-downy"
+                ].join(' ')}
               >
                 Book now
                 <div className="h-3.5 ml-2.5">
