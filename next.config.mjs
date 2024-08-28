@@ -2,7 +2,7 @@
 import path from 'path';
 
 const nextConfig = {
-   publicRuntimeConfig: {
+  publicRuntimeConfig: {
     siteOrigin: "http://localhost:3000",
   },
   images: {
