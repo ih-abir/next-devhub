@@ -12,16 +12,19 @@
   aspect-ratio: 3.3 / 2.63;
 }
 
-.stars-outer {
+.starsOuter {
+  display: flex;
   position: relative;
 
   &:before {
     content: "\2606 \2606 \2606 \2606 \2606";
+    font-size: 11px;
     color: #b0b0b0;
   }
 }
 
-.stars-inner {
+.starsInner {
+  display: flex;
   position: absolute;
   top: 0;
   left: 0;
@@ -30,6 +33,7 @@
 
   &:before {
     content: "\2605 \2605 \2605 \2605 \2605";
+    font-size: 11px;
     color: #ffd203;
   }
 }

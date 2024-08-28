@@ -127,7 +127,7 @@ const Hero = async (props: HeroProps) => {
 		              <div className="bg-primary/50" style={{ clipPath: "url(#heroImgFrame)" }}>
 		                <div className={styles.heroCurve}>
 		                  <Image
-		                    className="w-full h-full"
+		                    className="w-full h-full object-cover"
 		                    src={blob?.url}
 		                    alt={blob?.alternativeText}
 		                    width={534}
