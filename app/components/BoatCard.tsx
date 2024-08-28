@@ -1,3 +1,4 @@
+import React from 'react';
 import Link from "next/link";
 import Image from "next/image";
 import Markdown from "react-markdown";
@@ -137,8 +138,8 @@ const BoatCard = async ( props: BoatCardProps ) => {
           {
             boat_Departure?.length > 0 && boat_Return?.length > 0 && (
               <div className="w-full sm:w-4/5 md:w-full grid grid-cols-5 gap-x-2.5 gap-y-3 mb-8">
-                {departure.map((item) => (
-                  <>
+                {departure.map((item: DepartureAttributes, idx: string) => (
+                  <React.Fragment key={idx}>
                     <div className="col-span-2">
                       <div className={[styles.boatCardTxt, "font-bold"].join(' ')}>
                         Trips
@@ -293,7 +294,7 @@ const BoatCard = async ( props: BoatCardProps ) => {
                         </div>
                       </>
                     )}
-                  </>
+                  </React.Fragment>
                 ))}
               </div>
             )
