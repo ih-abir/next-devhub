@@ -18,6 +18,20 @@ interface DepartureTimeAttributes {
   Return_time?: string;
 }
 
+interface GoogleReviewAttributes {
+  profile_photo_url: string;
+  author_name: string;
+  text: string;
+  rating: number;
+}
+
+interface GoogleDataAttributes {
+  rating: number;
+  user_ratings_total: number;
+  place_id: string; 
+  reviews: GoogleReviewAttributes[];
+}
+
 interface DepartureAttributes {
   Starting_point_name: string;
   Ending_point_name: string;
@@ -40,7 +54,7 @@ interface BoatCardProps {
   Book_link?: string;
   Tripadvisor_link?: string;
   Departure: DepartureAttributes[];
-  googleData: Recod<string, any>;
+  googleMapsData: GoogleDataAttributes[];
 }
 
 const BoatCard = async ( props: BoatCardProps ) => {
@@ -66,10 +80,9 @@ const BoatCard = async ( props: BoatCardProps ) => {
   );
 
   const reviews = googleData?.reviews
-    .filter(({ rating }) => rating >= 4)
-    .sort(function (a, b) {
-      return b.rating - a.rating;
-    });
+    .filter((review: { rating: number }) => review.rating >= 4)
+    .sort((a: { rating: number }, b: { rating: number }) => b.rating - a.rating);
+
 
   const boat_time = departure.flatMap(({ Time }) => Time),
     boat_Departure = boat_time
@@ -300,7 +313,7 @@ const BoatCard = async ( props: BoatCardProps ) => {
 
           <div className="w-full">
             {
-              reviews?.slice(0, 1).map((review) => (
+              reviews?.slice(0, 1).map((review: GoogleReviewAttributes) => (
                 <React.Fragment key={0}>
                   <div 
                     className={[
@@ -336,7 +349,7 @@ const BoatCard = async ( props: BoatCardProps ) => {
                         <div className={[styles.starsOuter, "my-auto"].join(' ')}>
                           <div
                             className={styles.starsInner}
-                            style={{ width:`${reviews.rating * 20}%`}}
+                            style={{ width:`${review.rating * 20}%`}}
                           ></div>
                         </div>
                       </div>
