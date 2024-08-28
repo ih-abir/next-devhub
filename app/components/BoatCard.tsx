@@ -4,6 +4,8 @@ import Image from "next/image";
 import Markdown from "react-markdown";
 
 import PlaybtnIcon from "@images/playbtn.svg";
+import GIcon from "@images/G.svg";
+import TripadvisorIcon from "@images/tripadvisor.svg";
 import styles from '@styles/boat-card.module.scss';
 
 interface BlobAttributes {
@@ -38,6 +40,7 @@ interface BoatCardProps {
   Book_link?: string;
   Tripadvisor_link?: string;
   Departure: DepartureAttributes[];
+  googleData: Recod<string, any>;
 }
 
 const BoatCard = async ( props: BoatCardProps ) => {
@@ -51,21 +54,22 @@ const BoatCard = async ( props: BoatCardProps ) => {
     Book_link,
     Tripadvisor_link,
     Departure: departure,
+    googleMapsData,
   } = props;
 
   const mapsUrlPrefix =
     "https://www.google.com/maps/search/?api=1&query=Google&query_place_id=",
     googleReviewPrefix = "https://search.google.com/local/reviews?placeid=";
 
-  // const [googleData] = googleMapsData?.filter(
-  //   ({ place_id }) => place_id === Departure[0]?.Ending_point_google_place_id
-  // );
+  const [googleData] = googleMapsData?.filter(
+    ({ place_id }) => place_id === departure[0]?.Ending_point_google_place_id
+  );
 
-  // const reviews = googleData?.reviews
-  //   .filter(({ rating }) => rating >= 4)
-  //   .sort(function (a, b) {
-  //     return b.rating - a.rating;
-  //   });
+  const reviews = googleData?.reviews
+    .filter(({ rating }) => rating >= 4)
+    .sort(function (a, b) {
+      return b.rating - a.rating;
+    });
 
   const boat_time = departure.flatMap(({ Time }) => Time),
     boat_Departure = boat_time
@@ -295,45 +299,61 @@ const BoatCard = async ( props: BoatCardProps ) => {
           }
 
           <div className="w-full">
-            {/*{
+            {
               reviews?.slice(0, 1).map((review) => (
-                <>
-                  <div className="w-full mb-6 font-bold leading-[175%] boatCardTxt">
+                <React.Fragment key={0}>
+                  <div 
+                    className={[
+                      styles.boatCardTxt,
+                      "w-full mb-6 font-bold leading-[175%]"
+                    ].join(' ')}
+                  >
                     Reviews:
                   </div>
 
                   <div className="flex flex-wrap items-center">
-                    <div className="overflow-hidden mr-2.5 rounded-full boatCardImgContainer">
-                      <Picture
+                    <div 
+                      className={[
+                        styles.boatCardImgContainer,
+                        "overflow-hidden mr-2.5 rounded-full"
+                      ].join(' ')}
+                    >
+                      <Image
                         className="w-full h-full object-cover"
                         src={review.profile_photo_url}
-                        widths={[29, 39]}
-                        aspectRatio="1:1"
-                        sizes="(max-width: 650px) 100vw, 38px"
-                        format="webp"
+                        width={36}
+                        height={36}
+                        sizes="(min-width: 640px) 36px, 27px"
                         alt="avatar"
                       />
                     </div>
                     <div>
                       <div className="flex items-center gap-1 pb-0.5">
                         <div className="h-2.5 w-2.5">
-                          <Icon className="w-full h-full" src={GIcon} />
+                          <Image className="w-full h-full" src={GIcon} alt="" />
                         </div>
-                        <div className="stars-outer my-auto">
+
+                        <div className={[styles.starsOuter, "my-auto"].join(' ')}>
                           <div
-                            className="stars-inner"
-                            style={`width:${reviews.rating * 20}%`}
-                          />
+                            className={styles.starsInner}
+                            style={{ width:`${reviews.rating * 20}%`}}
+                          ></div>
                         </div>
                       </div>
-                      <div className="font-bold capitalize leading-[175%] boatCardTxt">
+
+                      <div 
+                        className={[
+                          styles.boatCardTxt,
+                          "font-bold capitalize leading-[175%]"
+                        ].join(' ')}
+                      >
                         {review.author_name}
                       </div>
                     </div>
                   </div>
 
                   <div className="roboto text-sm line-clamp-5 my-5">{review.text}</div>
-                </>
+                </React.Fragment>
               ))
             }
 
@@ -341,23 +361,24 @@ const BoatCard = async ( props: BoatCardProps ) => {
               googleData && (
                 <div className="flex flex-wrap gap-4 md:gap-10">
                   <div className="flex items-center gap-1 md:gap-2.5">
-                    <a
+                    <Link
                       href={
                         googleReviewPrefix +
-                        Departure[0]?.Starting_point_google_place_id
+                        departure[0]?.Starting_point_google_place_id
                       }
                     >
                       <div className="h-5 md:h-6 w-5 md:w-6">
                         <abbr title="Google maps link">
-                          <Icon className="w-full h-full" src={GIcon} />
+                          <Image className="w-full h-full" src={GIcon} alt="" />
                         </abbr>
                       </div>
-                    </a>
+                    </Link>
                     <div
-                      class:list={[
-                        "bg-viridian2 flex items-center justify-center px-4 py-0.5 gap-x-1.5 md:gap-x-3",
-                        "font-[clamp(0.5rem,1.1vw +.1rem,0.8125rem)] font-medium rounded-[26px]",
-                      ]}
+                      className={[
+                        "bg-viridian2 flex items-center justify-center",
+                        "px-4 py-0.5 gap-x-1.5 md:gap-x-3 rounded-full",
+                        "font-[clamp(0.5rem,1.1vw+.1rem,0.8125rem)] font-medium",
+                      ].join(' ')}
                     >
                       <span className="text-base font-bold text-yellow">&#9733;</span>
                       {googleData?.rating}
@@ -367,17 +388,17 @@ const BoatCard = async ( props: BoatCardProps ) => {
                     </div>
                   </div>
                   <div className="flex items-center gap-1 md:gap-2.5">
-                    <a href={Tripadvisor_link}>
+                    <Link href={Tripadvisor_link}>
                       <div className="h-5 md:h-6 w-5 md:w-6">
                         <abbr title="Tripadvisor link">
-                          <Icon className="w-full h-full" src={TripadvisorIcon} />
+                          <Image className="w-full h-full" src={TripadvisorIcon} alt="" />
                         </abbr>
                       </div>
-                    </a>
+                    </Link>
                   </div>
                 </div>
               )
-            }*/}
+            }
 
             <div
               className="flex flex-wrap items-center lg:justify-between gap-3 sm:gap-x-10 mt-14"
@@ -395,7 +416,6 @@ const BoatCard = async ( props: BoatCardProps ) => {
                   </Link>
                 )
               }
-
 
               {
                 Book_link && (
