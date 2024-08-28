@@ -401,13 +401,17 @@ const BoatCard = async ( props: BoatCardProps ) => {
                     </div>
                   </div>
                   <div className="flex items-center gap-1 md:gap-2.5">
-                    <Link href={Tripadvisor_link}>
-                      <div className="h-5 md:h-6 w-5 md:w-6">
-                        <abbr title="Tripadvisor link">
-                          <Image className="w-full h-full" src={TripadvisorIcon} alt="" />
-                        </abbr>
-                      </div>
-                    </Link>
+                    {
+                      Tripadvisor_link && (
+                        <Link href={Tripadvisor_link}>
+                          <div className="h-5 md:h-6 w-5 md:w-6">
+                            <abbr title="Tripadvisor link">
+                              <Image className="w-full h-full" src={TripadvisorIcon} alt="" />
+                            </abbr>
+                          </div>
+                        </Link>
+                      )
+                    }
                   </div>
                 </div>
               )
