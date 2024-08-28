@@ -26,7 +26,7 @@ interface DepartureAttributes {
   IDR_price_one_way_child: string;
   IDR_price_return_child: string;
   Price_child_age_range: string;
-  Time: any;
+  Time: DepartureTimeAttributes;
 }
 
 interface BoatCardProps {
@@ -190,11 +190,11 @@ const BoatCard = async ( props: BoatCardProps ) => {
 
                         <div className="col-auto justify-center items-center text-center">
                           {item.Time.map(
-                            (time) =>
-                              time.Departure_time && (
+                            ({ Departure_time }: DepartureTimeAttributes) =>
+                              Departure_time && (
                                 <div className={[styles.timeTxt, "leading-[175%]"].join(' ')}>
-                                  {hourFormat(time.Departure_time)}
-                                  {formatTime(time.Departure_time)}
+                                  {hourFormat(Departure_time)}
+                                  {formatTime(Departure_time)}
                                 </div>
                               )
                           )}
@@ -259,11 +259,11 @@ const BoatCard = async ( props: BoatCardProps ) => {
                         </div>
                         <div className="col-auto justify-center items-center text-center">
                           {item.Time.map(
-                            (time) =>
-                              time.Return_time && (
+                            ({ Return_time }: DepartureTimeAttributes) =>
+                              Return_time && (
                                 <div className={[styles.timeTxt, "leading-[175%]"].join(' ')}>
-                                  {hourFormat(time.Return_time)}
-                                  {formatTime(time.Return_time)}
+                                  {hourFormat(Return_time)}
+                                  {formatTime(Return_time)}
                                 </div>
                               )
                           )}
