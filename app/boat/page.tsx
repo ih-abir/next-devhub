@@ -9,7 +9,9 @@ const HomeBoat = async () => {
     Intro_text,
     Intro_blob,
   } = await CMS.get('homeBoat'),
-    posts = await CMS.get('boats');
+    posts = await CMS.get('boats'),
+    mapsData = await CMS.get('googleMapsData'),
+    googleMapsData = JSON.parse(mapsData.data);
 
   return (
     <>
@@ -20,7 +22,7 @@ const HomeBoat = async () => {
         role="list"
       >
         {posts.map((post: any, index: number) => (
-          <BoatCard key={index} {...post} />
+          <BoatCard key={index} googleMapsData={googleMapsData} {...post} />
         ))}
       </div>
     </>
