@@ -1,9 +1,8 @@
 /** @type {import('next').NextConfig} */
 import path from 'path';
-import withPlaiceholder from "@plaiceholder/next";
 
 const nextConfig = {
-   publicRuntimeConfig: {
+  publicRuntimeConfig: {
     siteOrigin: "http://localhost:3000",
   },
   images: {
@@ -26,4 +25,4 @@ const nextConfig = {
   },
 };
 
-export default withPlaiceholder(nextConfig);
+export default nextConfig;
