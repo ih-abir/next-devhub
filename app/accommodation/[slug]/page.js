@@ -13,5 +13,5 @@ export default function AccommodationPage({ params: { slug }}) {
     accommodations.find(({ Meta: { URL_slug } }) => URL_slug === slug) ??
     notFound();
 
-  return <PostDetails {...accommodation} />;
+  return <PostDetails type="accommodationDetails" posts={accommodations} {...accommodation} />;
 }
