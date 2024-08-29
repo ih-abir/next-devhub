@@ -49,7 +49,7 @@ const BasicPage = async (props: BasicPageProps) => {
                 alt={block_blob.alternativeText}
                 width={1230}
                 height={692}
-                sizes="(min-width: 1280px) 1230px, clac(100vw - 64px)"
+                sizes="(min-width: 1280px) 1230px, calc(100vw - 64px)"
                 priority
               />
             </div>
