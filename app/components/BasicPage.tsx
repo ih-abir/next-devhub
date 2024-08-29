@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Markdown from "react-markdown";
 import Hero from "@components/Hero";
+import ImageBase64 from "@components/ImageBase64";
 import styles from '@styles/basic.module.scss';
 
 interface BlobAttributes {
@@ -50,7 +51,8 @@ const BasicPage = async (props: BasicPageProps) => {
                 width={1230}
                 height={692}
                 sizes="(min-width: 1280px) 1230px, calc(100vw - 64px)"
-                priority
+                placeholder="blur"
+                blurDataURL={await ImageBase64(block_blob.url)}
               />
             </div>
           </div>
