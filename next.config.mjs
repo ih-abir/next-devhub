@@ -15,7 +15,7 @@ const nextConfig = {
     // Add support for custom paths
     config.resolve.alias = {
       ...config.resolve.alias,
-      '@queries': path.resolve(process.cwd(), 'queries'),
+      '@queries': path.resolve(process.cwd(), 'src/queries'),
     };
     
     return config;
