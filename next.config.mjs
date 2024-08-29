@@ -2,9 +2,6 @@
 import path from 'path';
 
 const nextConfig = {
-  publicRuntimeConfig: {
-    siteOrigin: "http://localhost:3000",
-  },
   images: {
     formats: ['image/avif', 'image/webp'],
     deviceSizes: [640, 768, 828, 1024, 1280, 1440, 1536, 1920, 2048, 3840],
