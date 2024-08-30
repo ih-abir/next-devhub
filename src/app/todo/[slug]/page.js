@@ -13,5 +13,5 @@ export default function AccommodationPage({ params: { slug }}) {
     todos.find(({ Meta: { URL_slug } }) => URL_slug === slug) ??
     notFound();
 
-  return <PostDetails {...todo} />;
+  return <PostDetails type="todoDetails" posts={todos} {...todo} />;
 }

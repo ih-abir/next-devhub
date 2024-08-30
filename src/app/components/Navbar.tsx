@@ -9,9 +9,6 @@ import Brand from "@images/nusa-ceningan-io-logo.svg";
 
 import CMS from "@utils/CMS";
 
-const { publicRuntimeConfig } = getConfig();
-const domain = publicRuntimeConfig.siteOrigin;
-
 interface MenuItem {
   Title: string;
   Title_url: string;
@@ -39,7 +36,7 @@ const Navbar = async () => {
         ].join(' ')}
       >
         <div className="my-auto">
-          <Link aria-label="home" href={domain}>
+          <Link aria-label="home" href="/">
             <Image
               className="w-full h-9 md:h-10 my-auto invert md:invert-0 brightness-0 md:brightness-100"
               src={Brand}

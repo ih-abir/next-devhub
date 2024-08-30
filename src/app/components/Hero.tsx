@@ -1,13 +1,13 @@
 import Link from "next/link";
 import Image from "next/image";
 import Markdown from "react-markdown";
-import sharp from 'sharp';
 
 import HeaderTxtBg from "@images/txtBg.svg";
 import locationIcon from "@images/location.svg";
 
 import styles from '@styles/hero.module.scss';
 import ClipPathSVG from "@components/ClipPathSVG";
+import ImageBase64 from "@components/ImageBase64";
 
 interface Blob {
   url: string;
@@ -36,19 +36,6 @@ const Hero = async (props: HeroProps) => {
   } = props;
 
 	const blob = intro_blob?.data?.attributes;
-
-	const getBase64 = async (src: string) => {
-		const buffer = await fetch(src).then(async (res) =>
-	    Buffer.from(await res.arrayBuffer())
-	  );
-
-    const base64 = await sharp(Buffer.from(buffer))
-	    .resize({ width: 10 })
-	    .toBuffer()
-	    .then((data) => `data:image/jpeg;base64,${data.toString('base64')}`);
-
-	  return base64;
-  };
 
 	return (
 		<div className="overflow-hidden pb-10">
@@ -148,7 +135,7 @@ const Hero = async (props: HeroProps) => {
 		                    height={534}
 		                    sizes="(min-width: 1440px) 534px, (min-width: 640px) 500px, 100vw"
 		                    placeholder="blur"
-		                    blurDataURL={await getBase64(blob?.url)}
+		                    blurDataURL={await ImageBase64(blob?.url)}
 		                    priority
 		                  />
 		                </div>

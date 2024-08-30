@@ -3,6 +3,8 @@ import Image from "next/image";
 import Markdown from "react-markdown";
 
 import Hero from "@components/Hero";
+import DefaultCard from "@components/DefaultCard";
+import ImageBase64 from "@components/ImageBase64";
 import PlaybtnIcon from "@images/playbtn.svg";
 import styles from '@styles/default-card.module.scss';
 
@@ -12,23 +14,27 @@ type BlobAttributes = {
 };
 
 type PageProps = {
+  type: string;
   Title: string;
   Description: string;
   Intro_blob: { data: { attributes: BlobAttributes } };
   Block_blob: { data: { attributes: BlobAttributes } };
   Book_link: string;
   Meta: { URL_slug: string };
+  posts: Record<string, any>;
 };
 
 const PostDetails = async(props: PageProps) => {
 
   const {
+    type,
     Title,
     Description: description,
     Intro_blob,
     Block_blob: { data: { attributes: block_blob } },
     Book_link,
     Meta: { URL_slug: slug_url },
+    posts,
   } = props;
 
   const [intro_text] = description.split("\n"),
@@ -56,8 +62,9 @@ const PostDetails = async(props: PageProps) => {
               alt={block_blob.alternativeText}
               width={1230}
               height={692}
-              sizes="(min-width: 1280px) 1230px, clac(100vw - 64px)"
-              priority
+              sizes="(min-width: 1280px) 1230px, calc(100vw - 64px)"
+              placeholder="blur"
+              blurDataURL={await ImageBase64(block_blob.url)}
             />
           </div>
         )}
@@ -114,7 +121,7 @@ const PostDetails = async(props: PageProps) => {
         )}*/}
       </div>
 
-      {/*<div className="wrapper flex flex-wrap mx-auto">
+      <div className="wrapper flex flex-wrap mx-auto">
         <div className="hidden lg:flex w-1/12 flex items-center justify-center my-auto z-10">
           <div className="relative flex items-center -mt-10">
             <div className="absolute lg:right-5 xl:right-10 z-10 w-[clamp(200px,50vw+25px,1250px)]">
@@ -131,23 +138,38 @@ const PostDetails = async(props: PageProps) => {
 
       <div className="wrapper relative z-20 overflow-x-hidden mx-auto px-8 xl:px-3 pb-20">
         <h2 className="pb-3 lg:pb-5 font-semibold text-[clamp(1.95rem,3vw+0.3rem,2.8rem)]">
-          Other {pageType === "todoDetails" ? "things to do" : "accommodations"}
+          Other {type === "todoDetails" ? "things to do" : "accommodations"}
         </h2>
 
-        <DefaultCardLayout posts={posts.slice(0, 3)} googleMapsData={googleMapsData} />
+        <div className="wrapper px-8 xl:px-3 mx-auto">
+          <div
+            role="list"
+            className={[
+              "grid justify-center gap-[35px]",
+              "grid-cols-[repeat(auto-fit,minmax(0,280px))] lg:grid-cols-3"
+            ].join(' ')}
+          >
+            {posts.map((post: any, type: string, index: number) => (
+              <DefaultCard key={index} type={type} {...post} />
+            ))}
+          </div>
+        </div>
 
         <div className="flex justify-center items-center mt-16">
-          <a
-            href={pageType === "todoDetails" ? "/todo/" : "/accommodation/"}
-            className="inline-flex items-center justify-center py-1.5 px-5 mt-3 text-lg font-medium rounded-full bg-downy"
+          <Link
+            href={type === "todoDetails" ? "/todo/" : "/accommodation/"}
+            className={[
+              "inline-flex items-center justify-center",
+              "py-1.5 px-5 mt-3 text-lg font-medium rounded-full bg-downy"
+            ].join(' ')}
           >
-            See All {pageType === "todoDetails" ? "Things To Do" : "Accommodations"}
+            See All {type === "todoDetails" ? "Things To Do" : "Accommodations"}
             <div className="h-3.5 ml-2.5">
               <Image className="w-full h-full" src={PlaybtnIcon} alt="" />
             </div>
-          </a>
+          </Link>
         </div>
-      </div>*/}
+      </div>
     </>
   );
 };
