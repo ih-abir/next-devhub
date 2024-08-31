@@ -4,6 +4,8 @@ import Boat from "@pages/Boat";
 import Posts from "@pages/Posts";
 import BasicPage from "@pages/BasicPage";
 import PostDetails from "@pages/PostDetails";
+import Homepage from "@pages/Homepage";
+import { notFound } from "next/navigation";
 
 const getAllPages = () => {
   const {
@@ -15,6 +17,7 @@ const getAllPages = () => {
     homeBoat,
     boats,
     basicPages,
+    homepage,
     googleMapsData,
   } = CMS.get("all");
 
@@ -25,6 +28,8 @@ const getAllPages = () => {
     slug:
       type === "todoDetails" || type === "accommodationDetails"
         ? additionalProps.slug
+        : page.Meta?.URL_slug === "/"
+        ? "/"
         : page.Meta?.URL_slug !== "/"
         ? page.Meta?.URL_slug.toLowerCase()
         : undefined,
@@ -33,7 +38,6 @@ const getAllPages = () => {
     genericData: genericElement,
   });
 
-  // Creating arrays for different types of pages
   const basicPagesData = basicPages.map((page) =>
     createPage(page, "basic")
   );
@@ -52,11 +56,25 @@ const getAllPages = () => {
   const todoPage = [
     createPage(homeTodo, "todo", { posts: todos, googleMapsData: googleData })
   ];
+
   const accommodationPage = [
-    createPage(homeAccommodation, "accommodation", { posts: accommodations, googleMapsData: googleData })
+    createPage(homeAccommodation, "accommodation", {
+      posts: accommodations,
+      googleMapsData: googleData
+    })
   ];
+
   const boatPage = [
     createPage(homeBoat, "boat", { posts: boats, googleMapsData: googleData })
+  ];
+
+  const homepageData = [
+    createPage(homepage, "homepage", {
+      todos,
+      boats,
+      homeTodo,
+      accommodations
+    })
   ];
 
   return [
@@ -66,45 +84,48 @@ const getAllPages = () => {
     ...todoPage,
     ...accommodationPage,
     ...boatPage,
+    ...homepageData,
   ].filter(Boolean);
 };
 
 export async function generateStaticParams() {
   const allPages = getAllPages();
-  const slugs = allPages.map(({ slug }) => slug.split('/'));
-  return slugs.map(slug => ({ slug }));
+
+  return allPages.map(({ slug }) => ({
+    slug: slug === '/' ? [] : slug.split('/'),
+  }));
 }
 
-export default async function Page({ params }) {
+export default function Page({ params }) {
   const { slug } = params;
-  const slugPath = slug ? slug.join('/') : '';
+  const slugPath = slug ? slug.join('/') : '/';
 
   const allPages = getAllPages();
   const page = allPages.find(p => p.slug === slugPath);
 
-  if (!page) {
-    return {
-      notFound: true,
-    };
+  if (!page && slugPath !== '/') {
+    return notFound();
   }
 
   return (
     <BaseLayout
-      meta={page.Meta}
-      slugURL={page.slug || page.Meta.URL_slug}
-      canonicalURL={page.canonical || page.Meta.Canonical_link}
-      metaImage={page.Intro_blob || page.genericData.OpenGraph_default}
-      genericData={page.genericData}
+      meta={page?.Meta}
+      slugURL={page?.slug || page?.Meta?.URL_slug}
+      canonicalURL={page?.canonical || page?.Meta?.Canonical_link}
+      metaImage={page?.Intro_blob || page?.genericData?.OpenGraph_default}
+      genericData={page?.genericData}
     >
       {
-        page.type === "basic" ? (
+        page?.type === "basic" ? (
           <BasicPage page={page} />
-        ) : (page.type === "todo" || page.type === "accommodation") ? (
+        ) : (page?.type === "todo" || page?.type === "accommodation") ? (
           <Posts page={page} />
-        ) : (page.type === "todoDetails" || page.type === "accommodationDetails") ? (
+        ) : (page?.type === "todoDetails" || page?.type === "accommodationDetails") ? (
           <PostDetails page={page} />
-        ) : page.type === "boat" ? (
+        ) : page?.type === "boat" ? (
           <Boat page={page} />
+        ) : page?.type === "homepage" ? (
+          <Homepage page={page} />
         ) : null
       }
     </BaseLayout>
