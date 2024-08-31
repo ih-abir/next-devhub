@@ -1,4 +1,3 @@
-
 import BaseLayout from "@layouts/BaseLayout";
 import CMS from "@utils/CMS";
 import Boat from "@pages/Boat";
@@ -18,6 +17,8 @@ const getAllPages = () => {
     basicPages,
     googleMapsData,
   } = CMS.get("all");
+
+  const googleData = JSON.parse(googleMapsData?.data);
 
   const createPage = (page, type, additionalProps = {}) => ({
     type,
@@ -49,13 +50,13 @@ const getAllPages = () => {
     })
   );
   const todoPage = [
-    createPage(homeTodo, "todo", { posts: todos })
+    createPage(homeTodo, "todo", { posts: todos, googleMapsData: googleData })
   ];
   const accommodationPage = [
-    createPage(homeAccommodation, "accommodation", { posts: accommodations })
+    createPage(homeAccommodation, "accommodation", { posts: accommodations, googleMapsData: googleData })
   ];
   const boatPage = [
-    createPage(homeBoat, "boat", { posts: boats })
+    createPage(homeBoat, "boat", { posts: boats, googleMapsData: googleData })
   ];
 
   return [
@@ -98,9 +99,9 @@ export default async function Page({ params }) {
       {
         page.type === "basic" ? (
           <BasicPage page={page} />
-        ) : page.type === "todo" || page.type === "accommodation" ? (
+        ) : (page.type === "todo" || page.type === "accommodation") ? (
           <Posts page={page} />
-        ) : page.type === "todoDetails" || page.type === "accommodationDetails" ? (
+        ) : (page.type === "todoDetails" || page.type === "accommodationDetails") ? (
           <PostDetails page={page} />
         ) : page.type === "boat" ? (
           <Boat page={page} />
