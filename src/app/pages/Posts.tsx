@@ -6,7 +6,22 @@ import Hero from "@components/Hero";
 import AboutIntro from "@components/AboutIntro";
 import DefaultCard from "@components/DefaultCard";
 
-const HomeTodo = async (props) => {
+interface BlobAttributes {
+  url: string;
+  alternativeText: string;
+}
+
+interface HomePostsProps {
+  page: {
+    type: string;
+    Title: string;
+    Intro_text: string;
+    Intro_blob: { data: { attributes: BlobAttributes } };
+    posts: Record<string, any>;
+  };
+}
+
+const HomePosts = async (props: HomePostsProps) => {
   const {
     type,
     Title,
@@ -24,7 +39,7 @@ const HomeTodo = async (props) => {
           role="list"
           className="grid grid-cols-[repeat(auto-fit,minmax(0,280px))] lg:grid-cols-3 gap-[35px] justify-center"
         >
-          {posts.map((post: any, type: string, index: number) => (
+          {posts?.map((post: any, index: number) => (
             <DefaultCard key={index} type={type} {...post} />
           ))}
         </div>
@@ -35,4 +50,4 @@ const HomeTodo = async (props) => {
   )
 }
 
-export default HomeTodo;
+export default HomePosts;
