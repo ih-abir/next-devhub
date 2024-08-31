@@ -1,8 +1,10 @@
 import Link from "next/link";
 import Image from "next/image";
 import Markdown from "react-markdown";
-import AboutIntro from "@components/AboutIntro";
+
 import Hero from "@components/Hero";
+import AboutIntro from "@components/AboutIntro";
+import BaseLayout from "@layouts/BaseLayout";
 
 import styles from '@styles/home.module.scss';
 import TodoTxtBg from "@images/todoTxtBg.svg";
@@ -34,14 +36,15 @@ const Homepage = async () => {
       boats,
       homeTodo,
       accommodations,
+      genericElement,
       homepage: page,
-    } = await CMS.get("all")
+    } = await CMS.get("all");
 
     accommodations.slice(0, 6).sort(sortFunction);
     boats.sort(sortFunction);
 
   return (
-    <>
+    <BaseLayout genericData={genericElement}>
       <Hero 
         Title={page.Title}
         Title_tag={page.Title_tag}
@@ -326,7 +329,7 @@ const Homepage = async () => {
         }
 
       <AboutIntro />
-    </>
+    </BaseLayout>
   );
 }
 
