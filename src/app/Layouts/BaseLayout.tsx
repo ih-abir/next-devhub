@@ -5,14 +5,17 @@ import "@styles/global.scss";
 import Navbar from "@components/Navbar";
 import Footer from "@components/Footer";
 
+interface BaseLayoutProps {
+  children: React.ReactNode;
+  genericData?: any;
+  [key: string]: any;
+}
+
 export default async function BaseLayout({
   children,
+  genericData,
   ...props
-}: {
-  children: React.ReactNode;
-}) {
-  const { genericData } = props;
-
+}: BaseLayoutProps) {
   return (
     <html lang="en">
       <body>
