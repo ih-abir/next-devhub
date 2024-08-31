@@ -13,14 +13,16 @@ type BlobAttributes = {
 };
 
 type PageProps = {
-  type: string;
-  Title: string;
-  Description: string;
-  Intro_blob: { data: { attributes: BlobAttributes } };
-  Block_blob: { data: { attributes: BlobAttributes } };
-  Book_link: string;
-  Meta: { URL_slug: string };
-  posts: Record<string, any>;
+  page: {
+    type: string;
+    Title: string;
+    Description: string;
+    Intro_blob: { data: { attributes: BlobAttributes } };
+    Block_blob: { data: { attributes: BlobAttributes } };
+    Book_link: string;
+    Meta: { URL_slug: string };
+    posts: Record<string, any>;
+  }
 };
 
 const PostDetails = async(props: PageProps) => {
