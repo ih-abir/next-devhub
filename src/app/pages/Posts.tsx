@@ -1,19 +1,34 @@
 import Link from "next/link";
 import Image from "next/image";
 import Markdown from "react-markdown";
+
 import Hero from "@components/Hero";
-import DefaultCard from "@components/DefaultCard";
 import AboutIntro from "@components/AboutIntro";
+import DefaultCard from "@components/DefaultCard";
 
-import CMS from "@utils/CMS";
+interface BlobAttributes {
+  url: string;
+  alternativeText: string;
+}
 
-const HomeAccommodation = async () => {
+interface HomePostsProps {
+  page: {
+    type: string;
+    Title: string;
+    Intro_text: string;
+    Intro_blob: { data: { attributes: BlobAttributes } };
+    posts: Record<string, any>;
+  };
+}
+
+const HomePosts = async (props: HomePostsProps) => {
   const {
+    type,
     Title,
     Intro_text,
     Intro_blob,
-  } = await CMS.get('homeAccommodation'),
-    posts = await CMS.get('accommodations');
+    posts,
+  } = props.page;
 
   return (
     <>
@@ -24,8 +39,8 @@ const HomeAccommodation = async () => {
           role="list"
           className="grid grid-cols-[repeat(auto-fit,minmax(0,280px))] lg:grid-cols-3 gap-[35px] justify-center"
         >
-          {posts.map((post: any, index: number) => (
-            <DefaultCard key={index} type="accommodationDetails" {...post} />
+          {posts?.map((post: any, index: number) => (
+            <DefaultCard key={index} type={type} {...post} />
           ))}
         </div>
       </div>
@@ -35,4 +50,4 @@ const HomeAccommodation = async () => {
   )
 }
 
-export default HomeAccommodation;
+export default HomePosts;

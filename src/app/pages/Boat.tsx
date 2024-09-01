@@ -1,22 +1,34 @@
 import Hero from "@components/Hero";
 import BoatCard from "@components/BoatCard";
 
-import CMS from "@utils/CMS";
+interface BlobAttributes {
+  url: string;
+  alternativeText: string;
+}
 
-const HomeBoat = async () => {
+interface HomeBoatProps {
+  page: {
+    Title: string;
+    Intro_text: string;
+    Intro_blob: { data: { attributes: BlobAttributes } };
+    posts: Record<string, any>;
+    googleMapsData: Record<string, any>;
+  };
+}
+
+const HomeBoat = async (props: HomeBoatProps) => {
   const {
     Title,
     Intro_text,
     Intro_blob,
-  } = await CMS.get('homeBoat'),
-    posts = await CMS.get('boats'),
-    mapsData = await CMS.get('googleMapsData'),
-    googleMapsData = JSON.parse(mapsData.data);
+    posts,
+    googleMapsData,
+  } = props.page;
 
   return (
     <>
       <Hero Title={Title} Intro_text={Intro_text} Intro_blob={Intro_blob} />
-
+  
       <div
         className="wrapper mx-auto flex flex-wrap gap-16 px-8 xl:px-3 py-10"
         role="list"

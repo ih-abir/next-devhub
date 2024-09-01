@@ -6,7 +6,6 @@ import Hero from "@components/Hero";
 import DefaultCard from "@components/DefaultCard";
 import ImageBase64 from "@components/ImageBase64";
 import PlaybtnIcon from "@images/playbtn.svg";
-import styles from '@styles/default-card.module.scss';
 
 type BlobAttributes = {
   url: string;
@@ -14,14 +13,16 @@ type BlobAttributes = {
 };
 
 type PageProps = {
-  type: string;
-  Title: string;
-  Description: string;
-  Intro_blob: { data: { attributes: BlobAttributes } };
-  Block_blob: { data: { attributes: BlobAttributes } };
-  Book_link: string;
-  Meta: { URL_slug: string };
-  posts: Record<string, any>;
+  page: {
+    type: string;
+    Title: string;
+    Description: string;
+    Intro_blob: { data: { attributes: BlobAttributes } };
+    Block_blob: { data: { attributes: BlobAttributes } };
+    Book_link: string;
+    Meta: { URL_slug: string };
+    posts: Record<string, any>;
+  }
 };
 
 const PostDetails = async(props: PageProps) => {
@@ -35,7 +36,7 @@ const PostDetails = async(props: PageProps) => {
     Book_link,
     Meta: { URL_slug: slug_url },
     posts,
-  } = props;
+  } = props.page;
 
   const [intro_text] = description.split("\n"),
     block_description = description.replace(intro_text, "");

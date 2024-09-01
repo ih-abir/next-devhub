@@ -41,7 +41,7 @@ const DefaultCard = async ( props: DefaultCardProps ) => {
   } = props;
     
   const [intro_text] = description.split("\n"),
-     slug = `/${type === "todoDetails" ? "todo" : "accommodation"}/${URL_slug}/`;
+     slug = `/${type === "todo" ? "todo" : "accommodation"}/${URL_slug}/`;
 
   const mapsData = await CMS.get('googleMapsData'),
     googleMapsData: GoogleDataAttributes[] = JSON.parse(mapsData.data);

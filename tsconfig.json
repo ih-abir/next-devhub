@@ -23,6 +23,8 @@
       "@images/*": ["../public/images/*"],
       "@styles/*": ["styles/*"],
       "@utils/*": ["utils/*"],
+      "@pages/*": ["app/pages/*"],
+      "@layouts/*": ["app/layouts/*"],
       "@components/*": ["app/components/*"]
     }
   },
