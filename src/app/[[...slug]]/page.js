@@ -1,11 +1,15 @@
-import BaseLayout from "@layouts/BaseLayout";
+import { notFound } from "next/navigation";
+
 import CMS from "@utils/CMS";
+
 import Boat from "@pages/Boat";
 import Posts from "@pages/Posts";
+import Homepage from "@pages/Homepage";
 import BasicPage from "@pages/BasicPage";
 import PostDetails from "@pages/PostDetails";
-import Homepage from "@pages/Homepage";
-import { notFound } from "next/navigation";
+
+import BaseLayout from "@layouts/BaseLayout";
+
 
 const getAllPages = () => {
   const {
