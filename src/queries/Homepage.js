@@ -35,6 +35,7 @@ const HomepageQuery = `
           
           Geo_latitude
           Geo_longitude
+          createdAt
           ${Meta}
         }
       }

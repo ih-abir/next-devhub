@@ -13,6 +13,7 @@ const BasicPagesQuery = `
           Images(sort: "createdAt:desc", pagination: { limit: -1 }) ${Image}
           Block_title
           Block_text
+          createdAt
           ${Meta}
         }
       }

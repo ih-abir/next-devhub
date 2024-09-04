@@ -9,6 +9,7 @@ const HomeTodoQuery = `
           Title
           Intro_text
           Intro_blob ${Image}
+          createdAt
           ${Meta}
         }
       }
