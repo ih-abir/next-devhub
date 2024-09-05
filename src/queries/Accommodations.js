@@ -16,6 +16,7 @@ const AccommodationsQuery = `
           Book_link
           
           createdAt
+          updatedAt
           ${Meta}
         }
       }

@@ -14,6 +14,7 @@ const BasicPagesQuery = `
           Block_title
           Block_text
           createdAt
+          updatedAt
           ${Meta}
         }
       }

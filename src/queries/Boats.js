@@ -28,6 +28,7 @@ const BoatsQuery = `
             }
           }
           createdAt
+          updatedAt
         }
       }
     }

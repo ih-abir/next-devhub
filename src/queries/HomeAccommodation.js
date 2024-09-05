@@ -10,6 +10,7 @@ const HomeAccommodationQuery = `
           Intro_text
           Intro_blob ${Image}
           createdAt
+          updatedAt
           ${Meta}
         }
       }
