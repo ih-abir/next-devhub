@@ -96,7 +96,7 @@ export async function generateStaticParams() {
   const allPages = getAllPages();
 
   return allPages.map(({ slug }) => ({
-    slug: slug === '/' ? [] : slug?.split('/'),
+    slug: slug === '/' ? [] : slug.split('/'),
   }));
 }
 
@@ -170,10 +170,10 @@ export async function generateMetadata({ params }, parent) {
 
 export default function Page({ params }) {
   const { slug } = params;
-  const slugPath = slug ? slug?.join('/') : '/';
+  const slugPath = slug ? slug.join('/') : '/';
 
   const allPages = getAllPages();
-  const page = allPages.find(p => p?.slug === slugPath);
+  const page = allPages.find(p => p.slug === slugPath);
 
   if (!page && slugPath !== '/') {
     return notFound();
