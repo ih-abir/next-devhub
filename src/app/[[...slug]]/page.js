@@ -34,8 +34,6 @@ const getAllPages = () => {
         ? additionalProps.slug
         : page.Meta?.URL_slug === "/"
         ? "/"
-        : page.Meta?.URL_slug === "404"
-        ? undefined
         : page.Meta?.URL_slug !== "/"
         ? page.Meta?.URL_slug.toLowerCase()
         : undefined,
