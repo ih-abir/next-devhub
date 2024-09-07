@@ -1,5 +1,3 @@
-import type { Metadata } from "next";
-
 import "@styles/global.scss";
 
 import Navbar from "@components/Navbar";
