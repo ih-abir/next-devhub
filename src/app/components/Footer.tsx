@@ -1,5 +1,5 @@
 import Link from "next/link";
-import Image from 'next/image';
+import Image from "next/image";
 import CameraIcon from "@images/camera.svg";
 import Brand from "@images/nusa-ceningan-io-logo.svg";
 
