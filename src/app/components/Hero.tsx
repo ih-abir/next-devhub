@@ -5,7 +5,7 @@ import Markdown from "react-markdown";
 import HeaderTxtBg from "@images/txtBg.svg";
 import locationIcon from "@images/location.svg";
 
-import styles from '@styles/hero.module.scss';
+import styles from "@styles/hero.module.scss";
 import ClipPathSVG from "@components/ClipPathSVG";
 import ImageBase64 from "@components/ImageBase64";
 

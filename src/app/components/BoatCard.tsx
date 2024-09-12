@@ -6,7 +6,7 @@ import Markdown from "react-markdown";
 import PlaybtnIcon from "@images/playbtn.svg";
 import GIcon from "@images/G.svg";
 import TripadvisorIcon from "@images/tripadvisor.svg";
-import styles from '@styles/boat-card.module.scss';
+import styles from "@styles/boat-card.module.scss";
 
 interface BlobAttributes {
   url: string;

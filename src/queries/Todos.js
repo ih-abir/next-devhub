@@ -15,6 +15,7 @@ const TodosQuery = `
           google_place_id
           
           createdAt
+          updatedAt
           ${Meta}
         }
       }

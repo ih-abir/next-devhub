@@ -1,7 +1,5 @@
 import Link from 'next/link';
 import Image from "next/image";
-import getConfig from 'next/config';
-import { usePathname } from 'next/navigation';
 
 import styles from '@styles/navbar.module.scss';
 import CameraIcon from "@images/camera.svg";

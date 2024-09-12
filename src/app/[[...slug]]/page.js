@@ -34,6 +34,8 @@ const getAllPages = () => {
         ? additionalProps.slug
         : page.Meta?.URL_slug === "/"
         ? "/"
+        : page.Meta?.URL_slug === "404"
+        ? undefined
         : page.Meta?.URL_slug !== "/"
         ? page.Meta?.URL_slug.toLowerCase()
         : undefined,
@@ -96,16 +98,84 @@ export async function generateStaticParams() {
   const allPages = getAllPages();
 
   return allPages.map(({ slug }) => ({
-    slug: slug === '/' ? [] : slug.split('/'),
+    slug: slug === '/' ? [] : slug?.split('/'),
   }));
 }
 
+export async function generateMetadata({ params }, parent) {
+  const allPages = getAllPages();
+  const slugPath = params.slug ? params?.slug?.join('/') : '/';
+
+  const page = allPages.find(p => p?.slug === slugPath);
+
+  const {
+    Intro_blob,
+    updatedAt,
+    Meta: {
+      HTML_Title,
+      Meta_description,
+      noindex,
+      nofollow,
+    }
+  } = page;
+
+  const blob = Intro_blob?.data?.attributes;
+  
+  const siteUrl = process.env.SITE_URL + (slugPath === "/" ? "/" : (`/${slugPath}/`));
+
+  return {
+    title: HTML_Title,
+    description: Meta_description,
+    alternates: {
+      canonical: siteUrl,
+      languages: {
+        'en-US': '/en-US',
+      },
+    },
+    author: 'Nusa ceningan',
+    openGraph: {
+      title: HTML_Title,
+      description: Meta_description,
+      url: siteUrl,
+      siteName: 'Nusa ceningan',
+      images: [
+        {
+          url: blob.url,
+          width: 800,
+          height: 600,
+        },
+        {
+          url: blob.url,
+          width: 1800,
+          height: 1600,
+          alt: blob.alternativeText,
+        },
+      ],
+      locale: 'en_US',
+      type: 'website',
+      publishedTime: updatedAt,
+    },
+    robots: {
+      index: !noindex,
+      follow: !nofollow,
+      googleBot: {
+        index: !noindex,
+        follow: !nofollow,
+        noimageindex: true,
+        'max-image-preview': 'large',
+        'max-snippet': -1,
+      },
+    },
+  }
+}
+
+
 export default function Page({ params }) {
   const { slug } = params;
-  const slugPath = slug ? slug.join('/') : '/';
+  const slugPath = slug ? slug?.join('/') : '/';
 
   const allPages = getAllPages();
-  const page = allPages.find(p => p.slug === slugPath);
+  const page = allPages.find(p => p?.slug === slugPath);
 
   if (!page && slugPath !== '/') {
     return notFound();

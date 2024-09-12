@@ -5,7 +5,7 @@ import Markdown from "react-markdown";
 import CMS from "@utils/CMS";
 
 import PlaybtnIcon from "@images/playbtn.svg";
-import styles from '@styles/default-card.module.scss';
+import styles from "@styles/default-card.module.scss";
 
 interface BlobAttributes {
   url: string;
