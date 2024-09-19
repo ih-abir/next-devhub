@@ -18,7 +18,7 @@ interface Props {
 }
 
 const Navbar = async () => {
-  const genericElement = await CMS.get('genericElement');
+  const genericElement = await CMS.get("genericElement");
 
   const { Nav_menu: menu, Instagram_link } = genericElement;
 

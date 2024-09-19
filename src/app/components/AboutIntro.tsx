@@ -30,7 +30,7 @@ const AboutIntro = async () => {
     About_intro_blob: {
       data: { attributes: blob },
     },
-  } = await CMS.get('genericElement');
+  } = await CMS.get("genericElement");
 
   return (
     <div
