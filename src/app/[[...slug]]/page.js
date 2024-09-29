@@ -10,22 +10,20 @@ import PostDetails from "@pages/PostDetails";
 
 import BaseLayout from "@layouts/BaseLayout";
 
-
-const getAllPages = () => {
+const getAllPages = async () => {
   const {
     genericElement,
     homeTodo,
     homeAccommodation,
-    todos,
-    accommodations,
     homeBoat,
     boats,
     basicPages,
     homepage,
     googleMapsData,
-  } = CMS.get("all");
+  } = await CMS.get("all"),
+    { todos, accommodations } = await CMS.get("all", { next: { revalidate: 1 }});
 
-  const googleData = JSON.parse(googleMapsData?.data);
+  const googleData = JSON.parse(googleMapsData?.data) || {};
 
   const createPage = (page, type, additionalProps = {}) => ({
     type,
@@ -60,11 +58,11 @@ const getAllPages = () => {
     })
   );
   const todoPage = [
-    createPage(homeTodo, "todo", { posts: todos, googleMapsData: googleData })
+    createPage(homeTodo, "todos", { posts: todos, googleMapsData: googleData })
   ];
 
   const accommodationPage = [
-    createPage(homeAccommodation, "accommodation", {
+    createPage(homeAccommodation, "accommodations", {
       posts: accommodations,
       googleMapsData: googleData
     })
@@ -95,7 +93,7 @@ const getAllPages = () => {
 };
 
 export async function generateStaticParams() {
-  const allPages = getAllPages();
+  const allPages = await getAllPages();
 
   return allPages.map(({ slug }) => ({
     slug: slug === '/' ? [] : slug?.split('/'),
@@ -103,21 +101,21 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }, parent) {
-  const allPages = getAllPages();
+  const allPages = await getAllPages();
   const slugPath = params.slug ? params?.slug?.join('/') : '/';
 
   const page = allPages.find(p => p?.slug === slugPath);
 
   const {
-    Intro_blob,
-    updatedAt,
+    Intro_blob = null,
+    updatedAt = null,
     Meta: {
-      HTML_Title,
-      Meta_description,
-      noindex,
-      nofollow,
-    }
-  } = page;
+      HTML_Title = '',
+      Meta_description = '',
+      noindex = null,
+      nofollow = null,
+    } = {},
+  } = page || {};
 
   const blob = Intro_blob?.data?.attributes;
   
@@ -138,19 +136,21 @@ export async function generateMetadata({ params }, parent) {
       description: Meta_description,
       url: siteUrl,
       siteName: 'Nusa ceningan',
-      images: [
-        {
-          url: blob.url,
-          width: 800,
-          height: 600,
-        },
-        {
-          url: blob.url,
-          width: 1800,
-          height: 1600,
-          alt: blob.alternativeText,
-        },
-      ],
+      ...( blob && {
+        images: [
+          {
+            url: blob.url,
+            width: 800,
+            height: 600,
+          },
+          {
+            url: blob.url,
+            width: 1800,
+            height: 1600,
+            alt: blob.alternativeText,
+          },
+        ],
+      }),
       locale: 'en_US',
       type: 'website',
       publishedTime: updatedAt,
@@ -170,38 +170,30 @@ export async function generateMetadata({ params }, parent) {
 }
 
 
-export default function Page({ params }) {
+export default async function Page({ params }) {
   const { slug } = params;
-  const slugPath = slug ? slug?.join('/') : '/';
+  const slugPath = slug ? slug.join('/') : '/';
 
-  const allPages = getAllPages();
+  const allPages = await getAllPages();
   const page = allPages.find(p => p?.slug === slugPath);
 
-  if (!page && slugPath !== '/') {
-    return notFound();
+  if (!page || !page?.Meta) {
+    return notFound(); // Page or Meta is missing
   }
 
   return (
-    <BaseLayout
-      meta={page?.Meta}
-      slugURL={page?.slug || page?.Meta?.URL_slug}
-      canonicalURL={page?.canonical || page?.Meta?.Canonical_link}
-      metaImage={page?.Intro_blob || page?.genericData?.OpenGraph_default}
-      genericData={page?.genericData}
-    >
-      {
-        page?.type === "basic" ? (
-          <BasicPage page={page} />
-        ) : (page?.type === "todo" || page?.type === "accommodation") ? (
-          <Posts page={page} />
-        ) : (page?.type === "todoDetails" || page?.type === "accommodationDetails") ? (
-          <PostDetails page={page} />
-        ) : page?.type === "boat" ? (
-          <Boat page={page} />
-        ) : page?.type === "homepage" ? (
-          <Homepage page={page} />
-        ) : null
-      }
+    <BaseLayout genericData={page.genericData} >
+      {page.type === "basic" ? (
+        <BasicPage page={page} />
+      ) : page.type === "todos" || page.type === "accommodations" ? (
+        <Posts page={page} />
+      ) : page.type === "todoDetails" || page.type === "accommodationDetails" ? (
+        <PostDetails page={page} />
+      ) : page.type === "boat" ? (
+        <Boat page={page} />
+      ) : page.type === "homepage" ? (
+        <Homepage page={page} />
+      ) : null}
     </BaseLayout>
   );
 }
