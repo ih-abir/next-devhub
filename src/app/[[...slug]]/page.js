@@ -58,11 +58,11 @@ const getAllPages = async () => {
     })
   );
   const todoPage = [
-    createPage(homeTodo, "todos", { posts: todos, googleMapsData: googleData })
+    createPage(homeTodo, "todo", { posts: todos, googleMapsData: googleData })
   ];
 
   const accommodationPage = [
-    createPage(homeAccommodation, "accommodations", {
+    createPage(homeAccommodation, "accommodation", {
       posts: accommodations,
       googleMapsData: googleData
     })
@@ -185,7 +185,7 @@ export default async function Page({ params }) {
     <BaseLayout genericData={page.genericData} >
       {page.type === "basic" ? (
         <BasicPage page={page} />
-      ) : page.type === "todos" || page.type === "accommodations" ? (
+      ) : page.type === "todo" || page.type === "accommodation" ? (
         <Posts page={page} />
       ) : page.type === "todoDetails" || page.type === "accommodationDetails" ? (
         <PostDetails page={page} />
