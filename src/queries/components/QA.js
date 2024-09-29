@@ -1,4 +1,4 @@
-import Image from "./Image.js";
+import Image from "@/queries/components/Image.js";
 
 const QA = `
   QA {
