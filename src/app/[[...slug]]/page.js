@@ -92,7 +92,7 @@ const getAllPages = async () => {
   ].filter(Boolean);
 };
 
-export const maxDuration = 20;
+export const maxDuration = 30;
 
 export async function generateStaticParams() {
   const allPages = await getAllPages();
