@@ -1,5 +1,5 @@
-import Image from "./components/Image.js";
-import Meta from "./components/Meta.js";
+import Image from "@/queries/components/Image";
+import Meta from "@/queries/components/Meta";
 
 const HomepageQuery = `
   {

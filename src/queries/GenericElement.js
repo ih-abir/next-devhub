@@ -1,4 +1,4 @@
-import Image from "./components/Image.js";
+import Image from "@/queries/components/Image";
 
 const Menu = `
   {
