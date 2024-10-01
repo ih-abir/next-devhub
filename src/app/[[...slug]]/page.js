@@ -21,7 +21,7 @@ const getAllPages = async () => {
     homepage,
     googleMapsData,
   } = await CMS.get("all"),
-    { todos, accommodations } = await CMS.get("all", { next: { revalidate: 1 }});
+    { todos, accommodations } = await CMS.get("all", { next: { revalidate: 30 }});
 
   const googleData = JSON.parse(googleMapsData?.data) || {};
 
@@ -91,8 +91,6 @@ const getAllPages = async () => {
     ...homepageData,
   ].filter(Boolean);
 };
-
-export const revalidate = 1
 
 export async function generateStaticParams() {
   const allPages = await getAllPages();
