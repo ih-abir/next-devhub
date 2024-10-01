@@ -21,7 +21,7 @@ const getAllPages = async () => {
     homepage,
     googleMapsData,
   } = await CMS.get("all"),
-    { todos, accommodations } = await CMS.get("all", { next: { revalidate: 30 }});
+    { todos, accommodations } = await CMS.get("all", { next: { revalidate: 1 }});
 
   const googleData = JSON.parse(googleMapsData?.data) || {};
 
