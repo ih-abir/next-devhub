@@ -1,7 +1,9 @@
 import fs from "fs";
+import path from "path";
 
 async function importAllQueries() {
-  const files = fs.readdirSync("src/queries").filter(file => file.endsWith('.js'));
+  const queryDir = path.join(process.cwd(), "src", "queries");
+  const files = fs.readdirSync(queryDir).filter(file => file.endsWith(".js"));
 
   const queries = {};
 
