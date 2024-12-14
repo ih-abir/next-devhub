@@ -14,7 +14,6 @@ export default async function BaseLayout({
   genericData,
   ...props
 }: BaseLayoutProps) {
-console.log("genericData", genericData)
   return (
     <html lang="en">
       <body>
