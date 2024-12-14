@@ -118,8 +118,6 @@ export async function generateMetadata({ params }, parent) {
       nofollow = null,
     } = {},
   } = page || {};
-
-  const blob = Intro_blob?.data?.attributes;
   
   const siteUrl = process.env.SITE_URL + (slugPath === "/" ? "/" : (`/${slugPath}/`));
 
@@ -138,18 +136,18 @@ export async function generateMetadata({ params }, parent) {
       description: Meta_description,
       url: siteUrl,
       siteName: 'Nusa ceningan',
-      ...( blob && {
+      ...( Intro_blob && {
         images: [
           {
-            url: blob.url,
+            url: Intro_blob?.url,
             width: 800,
             height: 600,
           },
           {
-            url: blob.url,
+            url: Intro_blob?.url,
             width: 1800,
             height: 1600,
-            alt: blob.alternativeText,
+            alt: Intro_blob?.alternativeText,
           },
         ],
       }),
