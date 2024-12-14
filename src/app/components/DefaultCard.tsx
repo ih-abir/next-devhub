@@ -22,10 +22,10 @@ interface DefaultCardProps {
   type: string;
   Title: string;
   Description: string;
-  Intro_blob: {data : {attributes: BlobAttributes}};
+  Intro_blob: BlobAttributes;
   Book_link: string;
   google_place_id?: string;
-  Meta: { URL_slug: string };
+  Seo: { URL_slug: string };
 }
 
 const DefaultCard = async ( props: DefaultCardProps ) => {
@@ -34,17 +34,17 @@ const DefaultCard = async ( props: DefaultCardProps ) => {
     type,
     Title: title,
     Description: description,
-    Intro_blob: { data: { attributes: blob } },
+    Intro_blob: blob,
     Book_link,
     google_place_id,
-    Meta: { URL_slug }
+    Seo: { URL_slug }
   } = props;
     
   const [intro_text] = description.split("\n"),
      slug = `/${type === "todo" ? "todo" : "accommodation"}/${URL_slug}/`;
 
   const mapsData = await CMS.get("googleMapsData"),
-    googleMapsData: GoogleDataAttributes[] = JSON.parse(mapsData.data);
+    googleMapsData: GoogleDataAttributes[] = mapsData.data;
 
   const [googleData] = googleMapsData?.filter(
     ({ place_id }) => place_id === google_place_id
@@ -68,7 +68,7 @@ const DefaultCard = async ( props: DefaultCardProps ) => {
               sizes={[
                 "(min-width: 1440px) 386px, (min-width: 1024px) 296px",
                 "(min-width: 345px) 280px, calc(100vw - 64px)"
-              ].join(',')}
+              ].join(', ')}
             />
           </div>
         </Link>

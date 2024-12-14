@@ -9,7 +9,7 @@ import CMS from "@utils/CMS";
 
 interface MenuItem {
   Title: string;
-  Title_url: string;
+  Url: string;
 }
 
 interface Props {
@@ -19,7 +19,7 @@ interface Props {
 
 const Navbar = async () => {
   const genericElement = await CMS.get("genericElement");
-
+  
   const { Nav_menu: menu, Instagram_link } = genericElement;
 
   const url = "/";
@@ -54,14 +54,14 @@ const Navbar = async () => {
         >
           <div className={`flex mr-auto my-auto ${styles.navMenuItem}`}>
             {
-              menu.slice(0, 3).map(({ Title, Title_url }: MenuItem, idx: number) => (
+              menu.slice(0, 3).map(({ Title, Url }: MenuItem, idx: number) => (
                 <div key={idx} className={idx === 0 ? "hidden lg:block" : ""}>
                   <Link
-                    href={Title_url === "/" ? "/" : `/${Title_url}/`}
+                    href={Url === "/" ? "/" : `/${Url}/`}
                     className={[
                       "relative inline-block whitespace-nowrap",
                       styles.navItem,
-                      url === Title_url ? styles.navActive : styles.navAnimation,
+                      url === Url ? styles.navActive : styles.navAnimation,
                     ].join(' ')}
                   >
                     {Title}
@@ -72,14 +72,14 @@ const Navbar = async () => {
           </div>
           <div className={`${styles.navMenuItem} flex my-auto text-center sm:text-left`}>
             {
-              menu.slice(3, 5).map(({ Title, Title_url }: MenuItem, idx: number) => (
+              menu.slice(3, 5).map(({ Title, Url }: MenuItem, idx: number) => (
                 <div key={idx}>
                   <Link
-                    href={Title_url === "/" ? "/" : `/${Title_url}/`}
+                    href={Url === "/" ? "/" : `/${Url}/`}
                     className={[
                       "relative inline-block whitespace-nowrap",
                       styles.navItem,
-                      url === Title_url ? styles.navActive : styles.navAnimation,
+                      url === Url ? styles.navActive : styles.navAnimation,
                     ].join(' ')}
                   >
                     {Title}
@@ -100,7 +100,7 @@ const Navbar = async () => {
             {/*<Search />*/}
           </div>
 
-          <Link aria-label="Instagram" href={Instagram_link} className="flex-none">
+          <Link aria-label="Instagram" href={Instagram_link || ""} className="flex-none">
             <div className="h-[clamp(28px,4vw+1.4px,33px)]">
               <Image 
                 className="w-full h-full"

@@ -13,8 +13,8 @@ interface BasicPageProps {
   page: {
     Title: string;
     Intro_text: string;
-    Intro_blob: { data: { attributes: BlobAttributes } };
-    Block_blob?: { data: { attributes: BlobAttributes } };
+    Intro_blob: BlobAttributes;
+    Block_blob?: BlobAttributes;
     Block_title?: string;
     Block_text?: string;
   };
@@ -25,12 +25,10 @@ const BasicPage = async (props: BasicPageProps) => {
     Title,
     Intro_text,
     Intro_blob,
-    Block_blob,
+    Block_blob: block_blob,
     Block_title: block_title,
     Block_text: block_text,
   } = props.page;
-  
-  const block_blob = Block_blob?.data?.attributes;
 
   return (
     <>

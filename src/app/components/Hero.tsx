@@ -20,7 +20,7 @@ interface HeroProps {
   Intro_text: string;
   Intro_button_text?: string;
   Intro_button_link?: string;
-  Intro_blob?: { data: { attributes: Blob } };
+  Intro_blob?: Blob;
   Intro_blob_place_text?: string;
 }
 
@@ -31,11 +31,9 @@ const Hero = async (props: HeroProps) => {
     Intro_text: intro_text,
     Intro_button_text: btnText,
     Intro_button_link: link,
-    Intro_blob: intro_blob,
+    Intro_blob: blob,
     Intro_blob_place_text: blob_place_text,
   } = props;
-
-	const blob = intro_blob?.data?.attributes;
 
 	return (
 		<div className="overflow-hidden pb-10">

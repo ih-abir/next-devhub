@@ -4,16 +4,12 @@ import Meta from "@/queries/components/Meta";
 const HomeBoatQuery = `
   {
     homeBoat {
-      data {
-        attributes {
-          Title
-          Intro_text
-          Intro_blob ${Image}
-          createdAt
-          updatedAt
-          ${Meta}
-        }
-      }
+      Title
+      Intro_text
+      Intro_blob ${Image}
+      createdAt
+      updatedAt
+      ${Meta}
     }
   }
 `;

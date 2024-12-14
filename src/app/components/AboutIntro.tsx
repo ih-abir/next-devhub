@@ -18,7 +18,7 @@ interface HeroProps {
   About_intro_text?: string;
   About_intro_button_text?: string;
   About_intro_button_link?: string;
-  About_intro_blob?: { data: { attributes: BlobAttributes } };
+  About_intro_blob?:BlobAttributes;
 }
 
 const AboutIntro = async () => {
@@ -27,9 +27,7 @@ const AboutIntro = async () => {
     About_intro_text: intro_text,
     About_intro_button_text: button_text,
     About_intro_button_link: button_link,
-    About_intro_blob: {
-      data: { attributes: blob },
-    },
+    About_intro_blob: blob,
   } = await CMS.get("genericElement");
 
   return (

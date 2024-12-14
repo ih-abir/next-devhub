@@ -1,7 +1,6 @@
 const Image = `
   {
-    data {
-      attributes {
+    
         url
         hash
         ext
@@ -9,8 +8,6 @@ const Image = `
         height
         alternativeText
         formats
-      }
-    }
   }
 `;
 

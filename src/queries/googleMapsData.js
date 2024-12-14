@@ -1,11 +1,7 @@
 const GoogleMapsDataQuery = `
   {
     googleMapsData {
-      data{
-        attributes{
-          data
-        }
-      }
+      data
     }
   }
 `;

@@ -23,19 +23,19 @@ const getAllPages = async () => {
   } = await CMS.get("all"),
     { todos, accommodations } = await CMS.get("all", { next: { revalidate: 1 }});
 
-  const googleData = JSON.parse(googleMapsData?.data) || {};
+  const googleData = googleMapsData.data || {};
 
   const createPage = (page, type, additionalProps = {}) => ({
     type,
     slug:
       type === "todoDetails" || type === "accommodationDetails"
         ? additionalProps.slug
-        : page.Meta?.URL_slug === "/"
+        : page.Seo?.URL_slug === "/"
         ? "/"
-        : page.Meta?.URL_slug === "404"
+        : page.Seo?.URL_slug === "404"
         ? undefined
-        : page.Meta?.URL_slug !== "/"
-        ? page.Meta?.URL_slug.toLowerCase()
+        : page.Seo?.URL_slug !== "/"
+        ? page.Seo?.URL_slug.toLowerCase()
         : undefined,
     ...page,
     ...additionalProps,
@@ -47,13 +47,13 @@ const getAllPages = async () => {
   );
   const todoDetailsPage = todos.map((page) =>
     createPage(page, "todoDetails", {
-      slug: `todo/${page.Meta.URL_slug.toLowerCase()}`,
+      slug: `todo/${page.Seo.URL_slug.toLowerCase()}`,
       posts: todos,
     })
   );
   const accommodationDetailsPage = accommodations.map((page) =>
     createPage(page, "accommodationDetails", {
-      slug: `accommodation/${page.Meta.URL_slug.toLowerCase()}`,
+      slug: `accommodation/${page.Seo.URL_slug.toLowerCase()}`,
       posts: accommodations,
     })
   );
@@ -111,7 +111,7 @@ export async function generateMetadata({ params }, parent) {
   const {
     Intro_blob = null,
     updatedAt = null,
-    Meta: {
+    Seo: {
       HTML_Title = '',
       Meta_description = '',
       noindex = null,
@@ -179,7 +179,7 @@ export default async function Page({ params }) {
   const allPages = await getAllPages();
   const page = allPages.find(p => p?.slug === slugPath);
 
-  if (!page || !page?.Meta) {
+  if (!page || !page?.Seo) {
     return notFound(); // Page or Meta is missing
   }
 

@@ -33,7 +33,7 @@ const fullQuery =
 
 async function fetchData(cache = null) {
   try {
-    const { data } = await fetch(process.env.DB_URL, {
+    const fetchedData = await fetch(process.env.DB_URL, {
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -46,7 +46,7 @@ async function fetchData(cache = null) {
       ...(cache)
     }).then(res => res.json());
 
-    return data;
+    return fetchedData;
   } catch (error) {
     console.error("Failed to fetch data from CMS:", error);
     return null;
@@ -55,19 +55,15 @@ async function fetchData(cache = null) {
 
 const CMS = {
   async get(contentType, cache = {}) {
-    const data = await fetchData(cache);
-    const format = (data) =>
-      Array.isArray(data)
-        ? data.map(({ attributes }) => attributes)
-        : data?.attributes || data;
+    const { data } = await fetchData(cache);
 
-    const content = data?.[contentType === "all" ? data : contentType]?.data;
+    const content = (
+      contentType === "all" 
+        ? data
+        : data[contentType]
+    )
 
-    return contentType === "all"
-      ? Object.fromEntries(
-          Object.entries(data).map(([key, { data }]) => [key, format(data)])
-        )
-      : format(content);
+    return content;
   },
 };
 

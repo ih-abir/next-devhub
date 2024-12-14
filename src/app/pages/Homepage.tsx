@@ -22,11 +22,11 @@ function sortFunction(a: any, b: any) {
 
 function getId(string: string) {
   const id = string
-    .toLowerCase()
-    .replace(/[^\w\s]/gi, "")
-    .split(" ")
-    .slice(0, 2)
-    .join("-");
+    ?.toLowerCase()
+    ?.replace(/[^\w\s]/gi, "")
+    ?.split(" ")
+    ?.slice(0, 2)
+    ?.join("-");
   return id;
 }
 
@@ -42,26 +42,26 @@ interface HomepageProps {
     Intro_text: string;
     Intro_button_text: string;
     Intro_button_link: string;
-    Intro_blob: { data: { attributes: BlobAttributes } };
+    Intro_blob: BlobAttributes;
     Intro_blob_place_text: string;
-    Todo_title: string;
-    Todo_intro_txt: string;
-    Todo_intro_button_text: string;
-    Todo_intro_button_link: string;
-    Todo_button_text_1: string;
-    Todo_button_text_2: string;
-    Todo_button_text_3: string;
-    Accomodation_title: string;
-    Accomodation_button_text: string;
-    Accomodation_button_link: string;
-    Boat_title: string;
-    Boat_intro_text: string;
-    Boat_intro_button_link: string;
-    Boat_intro_button_text: string;
-    todos: Record<string, any>;
+    Block_title: string;
+    Block_intro_text: string;
+    Block_button_text: string;
+    Block_button_link: string;
+    Block_todo1_button_text: string;
+    Block_todo2_button_text: string;
+    Block_todo3_button_text: string;
+    Block_todos: Record<string, any>;
+    Block2_title: string;
+    Block2_button_text: string;
+    Block2_button_link: string;
+    Block2_accommodations: Record<string, any>;
+    Block4_title: string;
+    Block4_intro_text: string;
+    Block4_button_link: string;
+    Block4_button_text: string;
     boats: Record<string, any>;
     homeTodo: Record<string, any>;
-    accommodations: Record<string, any>;
   };
 }
 
@@ -74,27 +74,27 @@ const Homepage = async (props:  HomepageProps) => {
       Intro_button_link,
       Intro_blob,
       Intro_blob_place_text,
-      Todo_title,
-      Todo_intro_txt,
-      Todo_intro_button_text,
-      Todo_intro_button_link,
-      Todo_button_text_1,
-      Todo_button_text_2,
-      Todo_button_text_3,
-      Accomodation_title,
-      Accomodation_button_text,
-      Accomodation_button_link,
-      Boat_title,
-      Boat_intro_text,
-      Boat_intro_button_link,
-      Boat_intro_button_text,
-      todos,
+      Block_title,
+      Block_intro_text,
+      Block_button_text,
+      Block_button_link,
+      Block_todo1_button_text,
+      Block_todo2_button_text,
+      Block_todo3_button_text,
+      Block_todos,
+      Block2_title,
+      Block2_button_text,
+      Block2_button_link,
+      Block2_accommodations,
+      Block4_title,
+      Block4_intro_text,
+      Block4_button_link,
+      Block4_button_text,
       boats,
       homeTodo,
-      accommodations,
     } = props.page;
 
-    accommodations.slice(0, 6).sort(sortFunction);
+    Block2_accommodations.slice(0, 6).sort(sortFunction);
     boats.sort(sortFunction);
 
   return (
@@ -109,18 +109,16 @@ const Homepage = async (props:  HomepageProps) => {
           Intro_blob_place_text={Intro_blob_place_text}
         />
 
-        <section id={getId(Todo_title)} className="bg-lightGreen overflow-x-hidden w-full">
+        <section id={getId(Block_title)} className="bg-lightGreen overflow-x-hidden w-full">
           <div className="wrapper w-full mx-auto flex flex-wrap justify-center px-8 lg:px-0 py-[75px]">
             <div className={`relative sm:px-4 sm:min-w-[655px] ${styles.homeTodoCol1}`}>
-              {todos.map(
+              {Block_todos.map(
                 (
                   {
                     Title,
                     Description,
-                    Intro_blob: {
-                      data: { attributes: blob },
-                    },
-                    Meta: { URL_slug },
+                    Intro_blob: blob,
+                    Seo: { URL_slug },
                   }: any,
                   idx: number
                 ) => {
@@ -155,7 +153,7 @@ const Homepage = async (props:  HomepageProps) => {
                         ].join(' ')}
                       >
                         <div className="overflow-hidden max-h-[167px] aspect-[2.3/1.67] rounded-lg">
-                          <Link href={`/${Todo_intro_button_link}/${URL_slug}/`}>
+                          <Link href={`/${Block_button_link}/${URL_slug}/`}>
                             <Image
                               className="w-full h-full object-cover"
                               src={blob?.url}
@@ -168,7 +166,7 @@ const Homepage = async (props:  HomepageProps) => {
                         </div>
                         <div className="pl-2.5">
                           <div className="py-3 text-[19px] font-extrabold leading-[106%] text-primary">
-                            <Link href={`/${Todo_intro_button_link}/${URL_slug}/`}>{Title}</Link>
+                            <Link href={`/${Block_button_link}/${URL_slug}/`}>{Title}</Link>
                           </div>
                           <div className="overflow-hidden prose mb-4 text-[15px] leading-[130%] line-clamp-6">
                             <Markdown>{Description.split("\n")[0]}</Markdown>
@@ -176,17 +174,17 @@ const Homepage = async (props:  HomepageProps) => {
                         </div>
                         <div className="flex justify-center">
                           <Link
-                            href={`/${Todo_intro_button_link}/${URL_slug}/`}
+                            href={`/${Block_button_link}/${URL_slug}/`}
                             className={[
                               "inline-flex items-center justify-center py-1 px-3 font-medium",
                               "text-white sm:min-w-[166px] sm:min-h-[35px] bg-primary rounded-[100px]",
                             ].join(' ')}
                           >
                             {idx === 0
-                              ? Todo_button_text_1
+                              ? Block_todo1_button_text
                               : idx === 1
-                              ? Todo_button_text_2
-                              : Todo_button_text_3}
+                              ? Block_todo2_button_text
+                              : Block_todo3_button_text}
                             <div className="h-3.5 ml-2.5">
                               <Image className="w-full h-full" src={PlaybtnWIcon} alt=""/>
                             </div>
@@ -211,19 +209,19 @@ const Homepage = async (props:  HomepageProps) => {
                   ].join(' ')}
                 >
                   <h2 className="norican text-[clamp(3rem,6vw+.15rem,3.5rem)]">
-                    {Todo_title}
+                    {Block_title}
                   </h2>
                   <div className="text-xl leading-8 lg:my-7 xl:my-9 mb-4 prose line-clamp-[7]">
-                    <Markdown>{Todo_intro_txt}</Markdown>
+                    <Markdown>{Block_intro_text}</Markdown>
                   </div>
                   <Link
-                    href={`/${Todo_intro_button_link}/`}
+                    href={`/${Block_button_link}/`}
                     className={[
                       "inline-flex items-center justify-center px-5 mt-9 lg:mt-8 min-h-[41px]",
                       "roboto text-[15px] font-medium tracking-[0.1px] text-black2 rounded-full bg-downy",
                     ].join(' ')}
                   >
-                    {Todo_intro_button_text}
+                    {Block_button_text}
 
                     <div className="h-3.5 ml-2.5">
                       <Image className="w-full h-full" src={PlaybtnIcon} alt="" />
@@ -236,11 +234,11 @@ const Homepage = async (props:  HomepageProps) => {
         </section>
 
         <section
-          id={getId(Accomodation_title)}
+          id={getId(Block2_title)}
           className="wrapper overflow-x-hidden py-10 mx-auto"
         >
           <h2 className="px-8 mx-auto text-[clamp(2.375rem,6vw+.15rem,3.725rem)] text-center">
-            {Accomodation_title}
+            {Block2_title}
           </h2>
 
           <div
@@ -250,14 +248,12 @@ const Homepage = async (props:  HomepageProps) => {
               "lg:grid-cols-3 gap-[35px] justify-center px-8 xl:px-3 mt-16",
             ].join(' ')}
           >
-            {accommodations.map(
+            {Block2_accommodations.map(
               (
                 {
                   Title,
-                  Intro_blob: {
-                    data: { attributes: blob },
-                  },
-                  Meta: { URL_slug },
+                  Intro_blob: blob,
+                  Seo: { URL_slug },
                 }: any,
                 idx: number
               ) => {
@@ -269,7 +265,7 @@ const Homepage = async (props:  HomepageProps) => {
                     aria-label={Title}
                   >
                     <div className="relative overflow-hidden aspect-[3.8/4.8] rounded-3xl">
-                      <Link href={`/${Accomodation_button_link}/${URL_slug}/`}>
+                      <Link href={`/${Block2_button_link}/${URL_slug}/`}>
                         <div className="w-full h-full">
                           <Image
                             className="w-full h-full object-cover z-10"
@@ -277,7 +273,7 @@ const Homepage = async (props:  HomepageProps) => {
                             alt={blob.alternativeText}
                             width={386}
                             height={488}
-                            sizes="(min-width: 1280px) 386px, (min-width: 1024px) 297px, 270px"
+                            sizes="(min-width: 1280px) 390px, (min-width: 1024px) 297px, 270px"
                           />
                         </div>
 
@@ -299,13 +295,13 @@ const Homepage = async (props:  HomepageProps) => {
           </div>
           <div className="flex justify-center pt-1">
             <Link
-              href={`/${Accomodation_button_link}/`}
+              href={`/${Block2_button_link}/`}
               className={[
                 "inline-flex items-center justify-center py-1.5 px-3.5",
                 "mt-9 lg:mt-14 text-lg font-medium bg-downy rounded-full",
               ].join(' ')}
             >
-              {Accomodation_button_text}
+              {Block2_button_text}
               <div className="h-3.5 ml-2.5">
                 <Image className="w-full h-full" src={PlaybtnIcon} alt=""/>
               </div>
@@ -315,21 +311,21 @@ const Homepage = async (props:  HomepageProps) => {
 
         {
           boats.length > 1 && (
-            <section id={getId(Boat_title)} className="bg-lightGreen overflow-hidden">
+            <section id={getId(Block4_title)} className="bg-lightGreen overflow-hidden">
               <div className="wrapper flex flex-wrap justify-center overflow-x-hidden py-10 companySec">
                 <div className="order-2 md:order-1 w-full md:w-1/2 lg:w-5/12 px-8 xl:px-3 flex items-center my-auto my-16">
                   <div className="companyContentContainer">
                     <h2 className="text-[clamp(2.4rem,6vw+.15rem,3.8rem)] leading-[100%] font-semibold">
-                      {Boat_title}
+                      {Block4_title}
                     </h2>
                     <div className="py-10 md:py-12 lg:py-14 xl:py-16 text-xl font-medium leading-8 prose">
-                      <Markdown>{Boat_intro_text}</Markdown>
+                      <Markdown>{Block4_intro_text}</Markdown>
                     </div>
                     <Link
-                      href={`/${Boat_intro_button_link}/`}
+                      href={`/${Block4_button_link}/`}
                       className="inline-flex items-center justify-center py-1.5 px-5 mt-3 text-lg font-medium bg-downy rounded-full"
                     >
-                      {Boat_intro_button_text}
+                      {Block4_button_text}
                       <div className="h-3.5 ml-2.5">
                         <Image className="w-full h-full" src={PlaybtnIcon} alt="" />
                       </div>
@@ -347,10 +343,10 @@ const Homepage = async (props:  HomepageProps) => {
                             idx === 1 ? 'flex justify-end ml-6 lg:ml-20' : 'flex justify-start'
                           } gap-7 md:gap-x-6 lg:gap-x-12 xl:gap-x-16`}
                         >
-                          {boats.splice(0, 2).map(({ Title, Logo: { data: { attributes: logo } } }: any, idx: number) => (
+                          {boats.splice(0, 2).map(({ Title, Logo: logo }: any, idx: number) => (
                             <Link
                               key={idx}
-                              href={`/${Boat_intro_button_link}/#${Title.replace(/\s+/g, '-').toLowerCase()}`}
+                              href={`/${Block4_button_link}/#${Title.replace(/\s+/g, '-').toLowerCase()}`}
                               aria-label={Title}
                             >
                               <div className={[

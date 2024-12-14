@@ -8,7 +8,7 @@ import ClipPathSVG from "@components/ClipPathSVG";
 
 interface MenuItem {
   Title: string;
-  Title_url: string;
+  Url: string;
 }
 
 interface BlobAttributes {
@@ -20,8 +20,8 @@ interface FooterProps {
   Footer_menu: MenuItem[];
   Instagram_link?: string;
   Footer_copyright: string;
-  Footer_image: { data: { attributes: BlobAttributes } };
-  Footer_image_sm: { data: { attributes: BlobAttributes } };
+  Footer_image: BlobAttributes;
+  Footer_image_sm: BlobAttributes;
 }
 
 const Footer = async ({genericElement}: {genericElement: FooterProps}) => {
@@ -30,12 +30,8 @@ const Footer = async ({genericElement}: {genericElement: FooterProps}) => {
     Footer_menu: menu,
     Instagram_link,
     Footer_copyright: copyright,
-    Footer_image: {
-      data: { attributes: background },
-    },
-    Footer_image_sm: {
-      data: { attributes: backgroundSm },
-    },
+    Footer_image: background,
+    Footer_image_sm: backgroundSm,
   } = genericElement;
 
   return (
@@ -106,10 +102,10 @@ const Footer = async ({genericElement}: {genericElement: FooterProps}) => {
                   styles.footerLinkContainer
                 ].join(' ')}
               >
-                {menu.map(({ Title, Title_url }) => (
+                {menu.map(({ Title, Url }, idx) => (
                   <Link
-                    key={Title_url}
-                    href={Title_url === '/' ? '/' : `/${Title_url}/`}
+                    key={idx}
+                    href={Url === '/' ? '/' : `/${Url}/`}
                     className="z-10 relative inline-block py-[3px] px-0.5"
                   >
                     {Title}

@@ -17,10 +17,10 @@ type PageProps = {
     type: string;
     Title: string;
     Description: string;
-    Intro_blob: { data: { attributes: BlobAttributes } };
-    Block_blob: { data: { attributes: BlobAttributes } };
+    Intro_blob: BlobAttributes;
+    Block_blob: BlobAttributes;
     Book_link: string;
-    Meta: { URL_slug: string };
+    Seo: { URL_slug: string };
     posts: Record<string, any>;
   }
 };
@@ -32,14 +32,16 @@ const PostDetails = async(props: PageProps) => {
     Title,
     Description: description,
     Intro_blob,
-    Block_blob: { data: { attributes: block_blob } },
+    Block_blob: block_blob,
     Book_link,
-    Meta: { URL_slug: slug_url },
+    Seo: { URL_slug: slug_url },
     posts,
   } = props.page;
 
   const [intro_text] = description.split("\n"),
     block_description = description.replace(intro_text, "");
+
+    console.log(block_description.toString())
 
   return (
     <>

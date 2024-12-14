@@ -7,7 +7,7 @@ const NotFound = async () => {
   const { basicPages, genericElement } = await CMS.get("all");
 
   const [page] = basicPages?.filter(
-    ({ Meta: { URL_slug } }: { Meta: { URL_slug: string } }) => URL_slug === "404"
+    ({ Seo: { URL_slug } }: { Seo: { URL_slug: string } }) => URL_slug === "404"
   );
 
   return (

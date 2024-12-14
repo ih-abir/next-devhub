@@ -42,14 +42,14 @@ interface DepartureAttributes {
   IDR_price_one_way_child: string;
   IDR_price_return_child: string;
   Price_child_age_range: string;
-  Time: DepartureTimeAttributes;
+  Departure_schedule: DepartureTimeAttributes[];
 }
 
 interface BoatCardProps {
   Title: string;
   Description: string;
-  Logo: {data : {attributes: BlobAttributes}};
-  Boat_image: {data : {attributes: BlobAttributes}};
+  Logo:  BlobAttributes;
+  Boat_image: BlobAttributes;
   Homepage_link?: string;
   Book_link?: string;
   Tripadvisor_link?: string;
@@ -62,8 +62,8 @@ const BoatCard = async ( props: BoatCardProps ) => {
   const {
     Title: title,
     Description: description,
-    Logo: { data: { attributes: logo } },
-    Boat_image: {data : {attributes: blob } },
+    Logo: logo,
+    Boat_image: blob,
     Homepage_link,
     Book_link,
     Tripadvisor_link,
@@ -84,7 +84,7 @@ const BoatCard = async ( props: BoatCardProps ) => {
     .sort((a: { rating: number }, b: { rating: number }) => b.rating - a.rating);
 
 
-  const boat_time = departure.flatMap(({ Time }) => Time),
+  const boat_time = departure.flatMap(({ Departure_schedule }) => Departure_schedule),
     boat_Departure = boat_time
       ?.map(({ Departure_time }) => Departure_time)
       .filter((x) => x),
@@ -92,17 +92,28 @@ const BoatCard = async ( props: BoatCardProps ) => {
       ?.map(({ Return_time }) => Return_time)
       .filter((x) => x);
 
-  function hourFormat(timeString: string): string {
-    const [hourString, minute] = timeString.split(":");
-    const hour = +hourString % 24;
-    return (hour % 12 || 12) + "." + minute;
+  function formatTime(timeString: string): string {
+    const [h, m] = timeString.split(":");
+    return `${(+h % 12 || 12)}.${m} ${+h < 12 ? "AM" : "PM"}`;
   }
 
-  function formatTime(timeString: string): string {
-    const [hourString, minute] = timeString.split(":");
-    const hour = +hourString % 24;
-    return hour < 12 ? "\xa0AM" : "\xa0PM";
-  }
+  const timeSchedule = (time: string) => (
+    <div
+      key={time}
+      className={[styles.timeTxt, "leading-[175%]"].join(' ')}
+    >
+      {formatTime(time)}
+    </div>
+  );
+
+  const boatCardTxt = (className: string, value: string) => (
+    <div
+      key={value}
+      className={[styles.boatCardTxt, className].join(' ')}
+    >
+      {value}
+    </div>
+  );
 
   return (
     <div
@@ -158,19 +169,13 @@ const BoatCard = async ( props: BoatCardProps ) => {
                 {departure.map((item: DepartureAttributes, idx: number) => (
                   <React.Fragment key={idx}>
                     <div className="col-span-2">
-                      <div className={[styles.boatCardTxt, "font-bold"].join(' ')}>
-                        Trips
-                      </div>
+                      {boatCardTxt("font-bold", "Trips")}
                     </div>
                     <div className="col-auto text-center">
-                      <div className={[styles.boatCardTxt, "font-bold"].join(' ')}>
-                        Time:
-                      </div>
+                      {boatCardTxt("font-bold", "Time:")}
                     </div>
                     <div className="col-span-2">
-                      <div className={[styles.boatCardTxt, "font-bold pl-4"].join(' ')}>
-                        Price:
-                      </div>
+                      {boatCardTxt("font-bold", "Price:")}
                     </div>
 
                     {boat_Departure?.length > 0 && (
@@ -204,37 +209,27 @@ const BoatCard = async ( props: BoatCardProps ) => {
                             </Link>
                           </div>
                         </div>
-
                         <div className="col-auto justify-center items-center text-center">
-                          {item.Time.Departure_time && (
-                            <div className={[styles.timeTxt, "leading-[175%]"].join(' ')}>
-                              {hourFormat(item.Time.Departure_time)}
-                              {formatTime(item.Time.Departure_time)}
-                            </div>
+                          {
+                            item.Departure_schedule?.map(({ Departure_time }) => (
+                              timeSchedule(Departure_time ?? "")
+                            )
                           )}
                         </div>
                         <div className="col-span-2">
                           <div>
-                            <div 
-                              className={[
-                                styles.boatCardTxt,
-                                "flex flex-wrap font-medium leading-[160%]"
-                              ].join(' ')}
-                            >
-                              IDR {item.IDR_price_one_way_adult} (adult)
-                            </div>
-                            <div 
-                              className={[
-                                styles.boatCardTxt,
-                                "flex flex-wrap font-medium leading-[160%]"
-                              ].join(' ')}
-                            >
-                              IDR {item.IDR_price_one_way_child}(
-                              {item.Price_child_age_range
-                                ? item.Price_child_age_range + `\xa0years`
-                                : `child`}
-                              )
-                            </div>
+                            {boatCardTxt(
+                              "flex flex-wrap font-medium leading-[160%]",
+                              `IDR ${item.IDR_price_one_way_adult} (adult)`
+                            )}
+
+                            {boatCardTxt(
+                              "flex flex-wrap font-medium leading-[160%]",
+                              `IDR ${item.IDR_price_one_way_child} (
+                                ${item.Price_child_age_range
+                                  ? item.Price_child_age_range + ` years`
+                                  : `child`})`
+                            )}
                           </div>
                         </div>
                       </>
@@ -272,35 +267,26 @@ const BoatCard = async ( props: BoatCardProps ) => {
                           </div>
                         </div>
                         <div className="col-auto justify-center items-center text-center">
-                          {item.Time.Return_time && (
-                            <div className={[styles.timeTxt, "leading-[175%]"].join(' ')}>
-                              {hourFormat(item.Time.Return_time)}
-                              {formatTime(item.Time.Return_time)}
-                            </div>
+                          {
+                            item.Departure_schedule?.map(({ Return_time }) => (
+                              timeSchedule(Return_time ?? "")
+                            )
                           )}
                         </div>
                         <div className="col-span-2">
                           <div>
-                            <div
-                              className={[
-                                styles.boatCardTxt,
-                                "flex flex-wrap font-medium leading-[160%]"
-                              ].join(' ')}
-                            >
-                              IDR {item.IDR_price_return_adult} (adult)
-                            </div>
-                            <div
-                              className={[
-                                styles.boatCardTxt,
-                                "flex flex-wrap font-medium leading-[160%]"
-                              ].join(' ')}
-                            >
-                              IDR {item.IDR_price_return_child}(
-                              {item.Price_child_age_range
-                                ? item.Price_child_age_range + `\xa0years`
-                                : `child`}
-                              )
-                            </div>
+                            {boatCardTxt(
+                              "flex flex-wrap font-medium leading-[160%]",
+                              `IDR ${item.IDR_price_return_adult} (adult)`
+                            )}
+
+                            {boatCardTxt(
+                              "flex flex-wrap font-medium leading-[160%]",
+                              `IDR ${item.IDR_price_return_child} (
+                                ${item.Price_child_age_range
+                                  ? item.Price_child_age_range + ` years`
+                                  : `child`})`
+                            )}
                           </div>
                         </div>
                       </>
@@ -315,14 +301,10 @@ const BoatCard = async ( props: BoatCardProps ) => {
             {
               reviews?.slice(0, 1).map((review: GoogleReviewAttributes) => (
                 <React.Fragment key={0}>
-                  <div 
-                    className={[
-                      styles.boatCardTxt,
-                      "w-full mb-6 font-bold leading-[175%]"
-                    ].join(' ')}
-                  >
-                    Reviews:
-                  </div>
+                  {boatCardTxt(
+                    "w-full mb-6 font-bold leading-[175%]",
+                    "Reviews:"
+                  )}
 
                   <div className="flex flex-wrap items-center">
                     <div 
@@ -354,14 +336,10 @@ const BoatCard = async ( props: BoatCardProps ) => {
                         </div>
                       </div>
 
-                      <div 
-                        className={[
-                          styles.boatCardTxt,
-                          "font-bold capitalize leading-[175%]"
-                        ].join(' ')}
-                      >
-                        {review.author_name}
-                      </div>
+                      {boatCardTxt(
+                        "font-bold capitalize leading-[175%]",
+                        review.author_name
+                      )}
                     </div>
                   </div>
 

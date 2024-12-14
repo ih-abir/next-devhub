@@ -1,7 +1,7 @@
 const Meta = `
-  Meta {
-    HTML_Title
-    Meta_description
+  Seo {
+    metaTitle
+    metaDescription
     noindex
     nofollow
     URL_slug

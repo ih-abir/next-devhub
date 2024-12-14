@@ -10,7 +10,7 @@ interface HomeBoatProps {
   page: {
     Title: string;
     Intro_text: string;
-    Intro_blob: { data: { attributes: BlobAttributes } };
+    Intro_blob: BlobAttributes;
     posts: Record<string, any>;
     googleMapsData: Record<string, any>;
   };
